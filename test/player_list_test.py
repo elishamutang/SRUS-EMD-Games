@@ -30,3 +30,4 @@ class TestPlayerList(unittest.TestCase):
 
         self.assertEqual(len(self.player_list), 2)
         self.assertEqual(self.player_list.head.key, 456)
+        self.assertEqual(self.player_list.tail.key, 123)
