@@ -67,3 +67,37 @@ class PlayerList:
             self.tail = node
             node.prev = current_node
             current_node.next = self.tail
+
+    # Delete item from head of list.
+    def unshift(self):
+        if self.is_empty:
+            return 'The list is empty.'
+
+        current_node = self.head
+
+        if current_node.next is not None:
+            new_head = current_node.next
+            new_head.prev = None
+            current_node.next = None
+
+            self.head = new_head
+        else:
+            self.head = None
+
+    # Delete item from tail of list.
+    def pop(self):
+        if self.is_empty:
+            return 'The list is empty.'
+
+        current_node = self.tail
+
+        if current_node.prev is not None:
+            new_tail = current_node.prev
+            new_tail.next = None
+            current_node.prev = None
+
+            # QUESTION: If list has 2 elements and we invoke pop() on it, does head == tail ?
+            self.tail = new_tail
+        else:
+            self.tail = None
+            self.head = self.tail
