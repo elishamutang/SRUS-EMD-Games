@@ -53,3 +53,17 @@ class PlayerList:
             self.head = node
             node.next = current_node
             current_node.prev = self.head
+
+    # Insert item at the tail of list.
+    def push(self, node):
+        if self.is_empty:
+            self.head = node
+        else:
+            current_node = self.head
+
+            while current_node.next is not None:
+                current_node = current_node.next
+
+            self.tail = node
+            node.prev = current_node
+            current_node.next = self.tail
