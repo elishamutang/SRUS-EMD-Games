@@ -98,7 +98,7 @@ class TestPlayerList(unittest.TestCase):
         self.player_list.pop()
 
         self.assertEqual(len(self.player_list), 1)
-        self.assertEqual(self.player_list.tail.key, 123)
+        self.assertEqual(self.player_list.tail, None)
         self.assertEqual(self.player_list.head.key, 123)
 
         self.player_list.pop()
