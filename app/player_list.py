@@ -56,10 +56,10 @@ class PlayerList:
         if self.is_empty:
             self.head = node
         else:
-            current_node = self.head
+            current_node = self.tail
 
-            while current_node.next is not None:
-                current_node = current_node.next
+            if current_node is None:
+                current_node = self.head
 
             self.tail = node
             node.prev = current_node
