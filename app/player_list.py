@@ -100,7 +100,6 @@ class PlayerList:
             new_tail.next = None
             current_node.prev = None
 
-            # QUESTION: If list has 2 elements and we invoke pop() on it, will the head == tail ?
             if len(self) > 1:
                 self.tail = new_tail
             else:
@@ -108,3 +107,30 @@ class PlayerList:
         else:
             self.tail = None
             self.head = self.tail
+
+    # Show entire list and present in a readable manner.
+    def display(self, forward=True):
+        print('\nDouble linked list: \n')
+        current_node = self.head
+
+        if forward is False:
+            current_node = self.tail
+            while current_node is not None:
+                if current_node == self.tail:
+                    print(f'Tail\n {current_node.key}\n ||')
+                elif current_node == self.head:
+                    print(f'{current_node.key}\nHead')
+                else:
+                    print(f' {current_node.key}\n ||')
+
+                current_node = current_node.prev
+        else:
+            while current_node is not None:
+                if current_node == self.head:
+                    print(f'Head\n {current_node.key}\n ||')
+                elif current_node == self.tail:
+                    print(f'{current_node.key}\nTail')
+                else:
+                    print(f' {current_node.key}\n ||')
+
+                current_node = current_node.next
