@@ -9,7 +9,7 @@ class PlayerList:
         current_node = self.head
 
         if current_node is None:
-            return length
+            return 0
         else:
             while current_node is not None:
                 current_node = current_node.next
@@ -91,13 +91,20 @@ class PlayerList:
 
         current_node = self.tail
 
+        # If only 1 element remaining, then current node would point to head and remove it.
+        if current_node is None:
+            current_node = self.head
+
         if current_node.prev is not None:
             new_tail = current_node.prev
             new_tail.next = None
             current_node.prev = None
 
-            # QUESTION: If list has 2 elements and we invoke pop() on it, does head == tail ?
-            self.tail = new_tail
+            # QUESTION: If list has 2 elements and we invoke pop() on it, will the head == tail ?
+            if len(self) > 1:
+                self.tail = new_tail
+            else:
+                self.tail = None
         else:
             self.tail = None
             self.head = self.tail
