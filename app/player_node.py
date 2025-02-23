@@ -6,9 +6,9 @@ class PlayerNode:
         self._prev = None
 
     def __str__(self):
-        return (f"Previous player: {self.prev.key if self.prev is not None else None},"
-                f"\nCurrent player: {self.key},"
-                f"\nNext player: {self.next.key if self.next is not None else None}")
+        return (f"Previous: {self.prev.key if self.prev is not None else None},"
+                f"\nCurrent: {self.key},"
+                f"\nNext: {self.next.key if self.next is not None else None}")
 
     @property
     def key(self):
