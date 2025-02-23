@@ -8,14 +8,11 @@ class PlayerList:
         length = 0
         current_node = self.head
 
-        if current_node is None:
-            return 0
-        else:
-            while current_node is not None:
-                current_node = current_node.next
-                length += 1
+        while current_node is not None:
+            current_node = current_node.next
+            length += 1
 
-            return length
+        return length
 
     @property
     def is_empty(self):
