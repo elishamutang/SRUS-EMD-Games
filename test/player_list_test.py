@@ -66,7 +66,9 @@ class TestPlayerList(unittest.TestCase):
 
         self.assertEqual(self.player_list.is_empty, True)
         self.assertEqual(self.player_list.head, None)
-        self.assertEqual(self.player_list.unshift(), 'The list is empty.')
+
+        with self.assertRaises(IndexError):
+            self.player_list.unshift()
 
     def test_remove_item_from_tail(self):
         self.player_list.push(self.test_player_one_node)
@@ -81,10 +83,13 @@ class TestPlayerList(unittest.TestCase):
         self.player_list.pop()
 
         self.assertEqual(len(self.player_list), 1)
-        self.assertEqual(self.player_list.tail, None)
         self.assertEqual(self.player_list.head.key, 123)
 
         self.player_list.pop()
 
+        self.assertEqual(self.player_list.tail, None)
         self.assertEqual(self.player_list.is_empty, True)
-        self.assertEqual(self.player_list.pop(), 'The list is empty.')
+
+        with self.assertRaises(IndexError):
+            self.player_list.pop()
+
