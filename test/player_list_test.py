@@ -31,6 +31,7 @@ class TestPlayerList(unittest.TestCase):
 
         self.assertEqual(self.player_list.is_empty, False)
         self.assertEqual(self.player_list.head.key, self.test_player_one_node.key)
+        self.assertEqual(len(self.player_list), 1)
 
     def test_add_to_head_on_non_empty_list(self):
         self.player_list.shift(self.test_player_one_node)
