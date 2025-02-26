@@ -1,10 +1,19 @@
 class PlayerList:
+    """
+    This is a double linked list implementation which represents the
+    player list at Softwares-R-Us.
+
+    Attributes:
+        _head (obj): Pointer to first node in list.
+        _tail (obj): Pointer to last node in list.
+    """
 
     def __init__(self):
         self._head = None
         self._tail = None
 
     def __len__(self):
+        """ Returns length of PlayerList class. """
         length = 0
         current_node = self.head
 
@@ -16,18 +25,29 @@ class PlayerList:
 
     @property
     def is_empty(self):
+        """ Determines if list is emtpy. """
         return len(self) == 0
 
     @property
     def head(self):
+        """ Returns head. """
         return self._head
 
     @property
     def tail(self):
+        """ Returns tail. """
         return self._tail
 
-    # Insert new node at head of list.
     def shift(self, node):
+        """
+        Inserts new player (node) at the head of list.
+
+        Args:
+            node (obj): Player node.
+
+        Returns:
+            None.
+        """
         if self.is_empty:
             self._head = node
         else:
@@ -43,8 +63,16 @@ class PlayerList:
             node.next = current_node
             current_node.prev = self.head
 
-    # Insert item at the tail of list.
     def push(self, node):
+        """
+        Inserts new player (node) at the tail of list.
+
+        Args:
+            node (obj): Player node.
+
+        Returns:
+            None.
+        """
         if self.is_empty:
             self._head = node
         else:
@@ -57,8 +85,8 @@ class PlayerList:
             node.prev = current_node
             current_node.next = self.tail
 
-    # Delete item from head of list.
     def unshift(self):
+        """ Deletes first player from the list. """
         if self.is_empty:
             raise IndexError('The list is empty.')
 
@@ -73,8 +101,8 @@ class PlayerList:
         else:
             self._head = None
 
-    # Delete item from tail of list.
     def pop(self):
+        """ Deletes last player from list. """
         if self.is_empty:
             raise IndexError('The list is empty.')
 
@@ -92,6 +120,16 @@ class PlayerList:
 
     # Show entire list and present in a readable manner.
     def display(self, forward=True):
+        """
+        Prints out the entire player list in a readable manner.
+
+        Args:
+            forward (bool): True - displays list from head to tail.
+                            False - displays list from tail to head.
+
+        Return:
+            None.
+        """
         if self.is_empty:
             raise IndexError('The list is empty.')
 
