@@ -157,4 +157,3 @@ class PlayerList:
                     print(f' {current_node}\n ||')
 
                 current_node = current_node.next
-
