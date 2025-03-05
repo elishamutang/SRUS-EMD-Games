@@ -111,5 +111,3 @@ class Player:
                 right.append(player)
 
         return cls.sort(left) + [pivot] + cls.sort(right)
-
-
