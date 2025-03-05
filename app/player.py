@@ -5,6 +5,7 @@ from app.player_node import PlayerNode
 
 
 class Player:
+
     def __init__(self, player_id: str, name: str, score: int = 0) -> None:
         self._id = player_id
         self._name = name
