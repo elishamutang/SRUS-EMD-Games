@@ -17,7 +17,7 @@ class Player:
         return self._name
 
     def __str__(self):
-        return f"Name: {self.name}, ID: {self.uid}"
+        return f"(ID: {self.uid}, Name: {self.name})"
 
     @classmethod
     def custom_hash(cls, key: str) -> int:
