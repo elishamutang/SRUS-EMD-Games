@@ -1,7 +1,8 @@
 import hashlib
 
+
 class Player:
-    def __init__(self, player_id, name):
+    def __init__(self, player_id: str, name: str) -> None:
         self._id = player_id
         self._name = name
 
@@ -19,7 +20,7 @@ class Player:
         return f"Name: {self.name}, ID: {self.uid}"
 
     @classmethod
-    def custom_hash(cls, key):
+    def custom_hash(cls, key: str) -> int:
         """
         Hash function that uses the SHA256 hash function
         https://docs.python.org/3/library/hashlib.html
