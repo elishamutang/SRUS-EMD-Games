@@ -119,7 +119,7 @@ class PlayerList:
             self._head = self.tail
 
     # Show entire list and present in a readable manner.
-    def display(self, forward=True):
+    def display(self, forward: bool = True) -> None:
         """
         Prints out the entire player list in a readable manner.
 
