@@ -140,21 +140,20 @@ class PlayerList:
             current_node = self.tail
             while current_node is not None:
                 if current_node == self.tail:
-                    print(f'Tail\n {current_node.key}\n ||')
+                    print(f'Tail\n {current_node}\n ||')
                 elif current_node == self.head:
-                    print(f'{current_node.key}\nHead')
+                    print(f'{current_node}\nHead')
                 else:
-                    print(f' {current_node.key}\n ||')
+                    print(f' {current_node}\n ||')
 
                 current_node = current_node.prev
         else:
             while current_node is not None:
                 if current_node == self.head:
-                    print(f'Head\n {current_node.key}\n ||')
+                    print(f'Head\n {current_node}\n ||')
                 elif current_node == self.tail:
-                    print(f'{current_node.key}\nTail')
+                    print(f'{current_node}\nTail')
                 else:
-                    print(f' {current_node.key}\n ||')
+                    print(f' {current_node}\n ||')
 
                 current_node = current_node.next
-
