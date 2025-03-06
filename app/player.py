@@ -1,5 +1,5 @@
 import hashlib
-
+from typing import Self
 
 class Player:
     def __init__(self, player_id: str, name: str) -> None:
@@ -36,4 +36,18 @@ class Player:
         return int(hashlib.sha256(key.encode()).hexdigest(), 16)
 
     def __hash__(self):
+        print('Calls dunder method')
         return self.custom_hash(self.uid)
+
+    def __eq__(self, other: Self) -> bool:
+        return self.uid == other.uid
+
+
+test = Player('123', 'John')
+test2 = Player('123', 'Jane')
+
+hash_val = hash(test)
+print(hash_val)
+
+custom_hash_val = Player.custom_hash(test.uid)
+print(custom_hash_val)
