@@ -1,4 +1,4 @@
-import hashlib
+import hashlib, math
 from typing import Self
 
 class Player:
@@ -33,10 +33,9 @@ class Player:
         Returns:
             hash (int)
         """
-        return int(hashlib.sha256(key.encode()).hexdigest(), 16)
+        return int(hashlib.sha256(key.encode()).hexdigest(), 16) % 10
 
     def __hash__(self):
-        print('Calls dunder method')
         return self.custom_hash(self.uid)
 
     def __eq__(self, other: Self) -> bool:
