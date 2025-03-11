@@ -37,12 +37,10 @@ class Player:
         """
 
         digest = hashlib.sha256(key.encode()).digest()
-        return int.from_bytes(digest) % sys.hash_info.modulus
+        return int.from_bytes(digest, "big") % sys.hash_info.modulus
 
     def __hash__(self):
         return self.custom_hash(self.uid)
 
     def __eq__(self, other: Self) -> bool:
         return self.uid == other.uid
-
-
