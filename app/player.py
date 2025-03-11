@@ -1,5 +1,7 @@
 import hashlib, math
 from typing import Self
+import sys
+
 
 class Player:
     def __init__(self, player_id: str, name: str) -> None:
@@ -33,7 +35,9 @@ class Player:
         Returns:
             hash (int)
         """
-        return int(hashlib.sha256(key.encode()).hexdigest(), 16) % 10
+
+        digest = hashlib.sha256(key.encode()).digest()
+        return int.from_bytes(digest) % sys.hash_info.modulus
 
     def __hash__(self):
         return self.custom_hash(self.uid)
@@ -42,11 +46,3 @@ class Player:
         return self.uid == other.uid
 
 
-test = Player('123', 'John')
-test2 = Player('123', 'Jane')
-
-hash_val = hash(test)
-print(hash_val)
-
-custom_hash_val = Player.custom_hash(test.uid)
-print(custom_hash_val)

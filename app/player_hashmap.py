@@ -2,6 +2,7 @@ from player_list import PlayerList
 from player import Player
 from player_node import PlayerNode
 
+
 class PlayerHashMap:
     SIZE: int = 10
 
@@ -44,3 +45,11 @@ class PlayerHashMap:
 
     def __delitem__(self, key: str) -> None:
         pass
+
+
+test_hashmap = PlayerHashMap()
+test_player = Player('123', 'John')
+
+test_hashmap['123'] = 'John'
+print(test_hashmap['123'])
+print(test_hashmap[test_player])
