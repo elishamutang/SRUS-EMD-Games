@@ -9,8 +9,32 @@ class PlayerHashMap:
     def __init__(self):
         self.hashmap = [PlayerList() for i in range(0, self.SIZE)]
 
-    def __getitem__(self, key: str | Player) -> int:
-        # Return player index based on Player hash.
+    def __getitem__(self, key: str | Player) -> Player:
+        player_list = self.hashmap[self.get_index(key)]
+
+        if player_list.is_empty:
+            raise KeyError('Key not found.')
+
+        current = player_list.head
+
+        while current.key != key and current.next is not None:
+            current = current.next
+
+        if current.key != key:
+            raise KeyError('Key not found.')
+
+        return current
+
+    def get_index(self, key: str | Player) -> int:
+        """
+        Returns player index to determine which player list it belongs to.
+        Args:
+            key (str): Player ID.
+            key (obj): Player object.
+
+        Returns:
+            index (int)
+        """
         if isinstance(key, Player):
             player_index = hash(key) % self.SIZE
         else:
@@ -24,13 +48,17 @@ class PlayerHashMap:
         new_player_node = PlayerNode(new_player)
 
         # Find index of PlayerList where new player will be placed.
-        player_list_index = self[new_player] # NOT SURE IF THIS IS GOOD PRACTICE OR NOT.
+        player_list_index = self.get_index(new_player)
 
         # Access PlayerList at player_list_index and place new_player_node if it does not already exist.
         player_list = self.hashmap[player_list_index]
 
-        # Check if player already exists.
         if player_list.is_empty is False:
+            """
+            If player_list is NOT empty, check if player with same key is already in the list. If it is:
+                a) Update the name, if not
+                b) add to player_list.
+            """
 
             current = player_list.head
             prev_node = None
@@ -52,6 +80,7 @@ class PlayerHashMap:
                 current.next = None
                 current.prev = None
 
+                # Construct new PlayerList instance and overwrite existing list in player hashmap.
                 new_player_list = PlayerList()
                 new_player_list.push(new_player_node)
 
@@ -63,11 +92,10 @@ class PlayerHashMap:
 
         else:
             print(f"Key where list (index {player_list_index}) is empty: {key}")
-            # And push to player list.
             player_list.push(new_player_node)
 
 
-    def __len__(self):
+    def __len__(self) -> int:
         length = 0
 
         for i in range(self.SIZE):
@@ -76,14 +104,28 @@ class PlayerHashMap:
         return length
 
     def __delitem__(self, key: str) -> None:
+        print(f"Key {key} to be deleted.")
+
+        # Get corresponding player_list
+        player_list = self.hashmap[self.get_index(key)]
+
+
+
+    def display(self):
         pass
 
 
+# Tests
 test_hashmap = PlayerHashMap()
 test_hashmap['123'] = 'John'
 test_hashmap['456'] = 'Jane'
 test_hashmap['789'] = 'Jeremy'
 test_hashmap['123'] = 'Aaron'
+test_hashmap['888'] = 'Heng'
+
+print(test_hashmap['888'])
+# Delete
+del test_hashmap['456']
 
 print("\n==========================================")
 print(f"Length of hashmap: {len(test_hashmap)}")
