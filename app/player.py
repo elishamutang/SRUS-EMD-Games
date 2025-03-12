@@ -9,16 +9,16 @@ class Player:
         self._name = name
 
     @property
-    def uid(self):
+    def uid(self) -> str:
         """Get player ID."""
         return self._id
 
     @property
-    def name(self):
+    def name(self) -> str:
         """Get player name."""
         return self._name
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"(ID: {self.uid}, Name: {self.name})"
 
     @classmethod
@@ -39,7 +39,7 @@ class Player:
         digest = hashlib.sha256(key.encode()).digest()
         return int.from_bytes(digest, "big") % sys.hash_info.modulus
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         return self.custom_hash(self.uid)
 
     def __eq__(self, other: Self) -> bool:

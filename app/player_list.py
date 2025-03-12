@@ -12,7 +12,7 @@ class PlayerList:
         self._head = None
         self._tail = None
 
-    def __len__(self):
+    def __len__(self) -> int:
         """ Returns length of PlayerList class. """
         length = 0
         current_node = self.head
@@ -24,7 +24,7 @@ class PlayerList:
         return length
 
     @property
-    def is_empty(self):
+    def is_empty(self) -> bool:
         """ Determines if list is emtpy. """
         return len(self) == 0
 
@@ -38,7 +38,7 @@ class PlayerList:
         """ Returns tail. """
         return self._tail
 
-    def shift(self, node):
+    def shift(self, node) -> None:
         """
         Inserts new player (node) at the head of list.
 
@@ -63,7 +63,7 @@ class PlayerList:
             node.next = current_node
             current_node.prev = self.head
 
-    def push(self, node):
+    def push(self, node) -> None:
         """
         Inserts new player (node) at the tail of list.
 
@@ -85,7 +85,7 @@ class PlayerList:
             node.prev = current_node
             current_node.next = self.tail
 
-    def unshift(self):
+    def unshift(self) -> None:
         """ Deletes first player from the list. """
         if self.is_empty:
             raise IndexError('The list is empty.')
@@ -101,7 +101,7 @@ class PlayerList:
         else:
             self._head = None
 
-    def pop(self):
+    def pop(self) -> None:
         """ Deletes last player from list. """
         if self.is_empty:
             raise IndexError('The list is empty.')
