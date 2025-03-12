@@ -9,7 +9,7 @@ class PlayerHashMap:
     def __init__(self):
         self.hashmap = [PlayerList() for i in range(0, self.SIZE)]
 
-    def __getitem__(self, key: str | Player) -> Player:
+    def __getitem__(self, key: str | Player) -> PlayerNode:
         player_list = self.hashmap[self.get_index(key)]
 
         if player_list.is_empty:
@@ -61,30 +61,21 @@ class PlayerHashMap:
             """
 
             current = player_list.head
-            prev_node = None
 
             while current.key != key and current.next is not None:
-                prev_node = current
                 current = current.next
 
             if current.key == key:
 
-                if prev_node is not None:
-                    prev_node.next = new_player_node
+                player_clone = self[key]
 
-                current.next.prev = new_player_node
+                if player_clone.next is not None:
+                    player_clone.next.prev = new_player_node
+                    new_player_node.next = player_clone.next
 
-                new_player_node.prev = prev_node
-                new_player_node.next = current.next
-
-                current.next = None
-                current.prev = None
-
-                # Construct new PlayerList instance and overwrite existing list in player hashmap.
-                new_player_list = PlayerList()
-                new_player_list.push(new_player_node)
-
-                self.hashmap[player_list_index] = new_player_list
+                if player_clone.prev is not None:
+                    player_clone.prev.next = new_player_node
+                    new_player_node.prev = player_clone.prev
 
             else:
                 print(f"New player key {key} added to player list at index {player_list_index}")
@@ -104,11 +95,24 @@ class PlayerHashMap:
         return length
 
     def __delitem__(self, key: str) -> None:
-        print(f"Key {key} to be deleted.")
+        try:
+            # Get player node and corresponding player_list
+            selected_player = self[key]
+            player_list = self.hashmap[self.get_index(key)]
 
-        # Get corresponding player_list
-        player_list = self.hashmap[self.get_index(key)]
+            # Pop player_list if list only contains one player.
+            if len(player_list) == 1:
+                player_list.pop()
+            else:
+                if selected_player.next is not None:
+                    selected_player.next.prev = None
+                    selected_player.next = None
 
+                if selected_player.prev is not None:
+                    selected_player.prev.next = None
+                    selected_player.prev = None
+        except KeyError:
+            raise
 
 
     def display(self):
@@ -123,9 +127,12 @@ test_hashmap['789'] = 'Jeremy'
 test_hashmap['123'] = 'Aaron'
 test_hashmap['888'] = 'Heng'
 
-print(test_hashmap['888'])
+# print(test_hashmap['888'])
 # Delete
-del test_hashmap['456']
+# del test_hashmap['456']
+# del test_hashmap['123']
+# del test_hashmap['789']
+# del test_hashmap['111']
 
 print("\n==========================================")
 print(f"Length of hashmap: {len(test_hashmap)}")
