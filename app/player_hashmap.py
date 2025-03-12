@@ -30,15 +30,47 @@ class PlayerHashMap:
         player_list = self.hashmap[player_list_index]
 
         # Check if player already exists.
+        if player_list.is_empty is False:
 
-        # And push to player list.
-        player_list.push(new_player_node)
+            current = player_list.head
+            prev_node = None
+
+            while current.key != key and current.next is not None:
+                prev_node = current
+                current = current.next
+
+            if current.key == key:
+
+                if prev_node is not None:
+                    prev_node.next = new_player_node
+
+                current.next.prev = new_player_node
+
+                new_player_node.prev = prev_node
+                new_player_node.next = current.next
+
+                current.next = None
+                current.prev = None
+
+                new_player_list = PlayerList()
+                new_player_list.push(new_player_node)
+
+                self.hashmap[player_list_index] = new_player_list
+
+            else:
+                print(f"New player key {key} added to player list at index {player_list_index}")
+                player_list.push(new_player_node)
+
+        else:
+            print(f"Key where list (index {player_list_index}) is empty: {key}")
+            # And push to player list.
+            player_list.push(new_player_node)
+
 
     def __len__(self):
         length = 0
 
         for i in range(self.SIZE):
-            # print(len(self.hashmap[i]))
             length += len(self.hashmap[i])
 
         return length
@@ -50,8 +82,9 @@ class PlayerHashMap:
 test_hashmap = PlayerHashMap()
 test_hashmap['123'] = 'John'
 test_hashmap['456'] = 'Jane'
+test_hashmap['789'] = 'Jeremy'
+test_hashmap['123'] = 'Aaron'
 
-print(len(test_hashmap))
-for hashmap in test_hashmap.hashmap:
-    if len(hashmap) >= 1:
-        print(hashmap.display())
+print("\n==========================================")
+print(f"Length of hashmap: {len(test_hashmap)}")
+print("==========================================")
