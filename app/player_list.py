@@ -108,6 +108,9 @@ class PlayerList:
 
         current_node = self.tail
 
+        if current_node is None:
+            current_node = self.head
+
         if current_node.prev is not None:
             new_tail = current_node.prev
             new_tail.next = None
