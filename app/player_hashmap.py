@@ -10,6 +10,15 @@ class PlayerHashMap:
         self.hashmap = [PlayerList() for i in range(0, self.SIZE)]
 
     def __getitem__(self, key: str | Player) -> PlayerNode:
+        """
+        Returns PlayerNode object of selected key.
+        Args:
+            key (str): Player ID.
+            key (obj): Player object.
+
+        Returns:
+            PlayerNode (obj)
+        """
         player_list = self.hashmap[self.get_index(key)]
 
         if player_list.is_empty:
@@ -43,6 +52,16 @@ class PlayerHashMap:
         return player_index
 
     def __setitem__(self, key: str, name: str) -> None:
+        """
+        Add new player to hashmap or update existing player.
+        Args:
+            key (str): Player ID.
+            name (str): Player name.
+
+        Returns:
+            None
+        """
+
         # Create new player.
         new_player = Player(key, name)
         new_player_node = PlayerNode(new_player)
@@ -87,6 +106,7 @@ class PlayerHashMap:
 
 
     def __len__(self) -> int:
+        """Returns length of PlayerHashMap."""
         length = 0
 
         for i in range(self.SIZE):
@@ -95,6 +115,14 @@ class PlayerHashMap:
         return length
 
     def __delitem__(self, key: str) -> None:
+        """
+        Deletes player from player list in player hashmap.
+        Args:
+            key (str): Player ID.
+
+        Returns:
+            None
+        """
         try:
             # Get player node and corresponding player_list
             selected_player = self[key]
@@ -115,7 +143,7 @@ class PlayerHashMap:
             raise
 
 
-    def display(self):
+    def display(self) -> None:
         pass
 
 
