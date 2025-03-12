@@ -78,14 +78,7 @@ class PlayerHashMap:
                 a) Update the name, if not
                 b) add to player_list.
             """
-
-            current = player_list.head
-
-            while current.key != key and current.next is not None:
-                current = current.next
-
-            if current.key == key:
-
+            try:
                 player_clone = self[key]
 
                 if player_clone.next is not None:
@@ -96,14 +89,19 @@ class PlayerHashMap:
                     player_clone.prev.next = new_player_node
                     new_player_node.prev = player_clone.prev
 
-            else:
+                new_player_list = PlayerList()
+                new_player_list.push(new_player_node)
+
+                player_list = new_player_list
+                self.hashmap[player_list_index] = player_list
+
+            except KeyError:
                 print(f"New player key {key} added to player list at index {player_list_index}")
                 player_list.push(new_player_node)
 
         else:
             print(f"Key where list (index {player_list_index}) is empty: {key}")
             player_list.push(new_player_node)
-
 
     def __len__(self) -> int:
         """Returns length of PlayerHashMap."""
@@ -154,6 +152,7 @@ test_hashmap['456'] = 'Jane'
 test_hashmap['789'] = 'Jeremy'
 test_hashmap['123'] = 'Aaron'
 test_hashmap['888'] = 'Heng'
+test_hashmap['789'] = 'Remy'
 
 # print(test_hashmap['888'])
 # Delete
