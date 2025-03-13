@@ -36,8 +36,11 @@ class Player:
             hash (int)
         """
 
-        digest = hashlib.sha256(key.encode()).digest()
-        return int.from_bytes(digest, "big") % sys.hash_info.modulus
+        if isinstance(key, str):
+            digest = hashlib.sha256(key.encode()).digest()
+            return int.from_bytes(digest, "big") % sys.hash_info.modulus
+
+        raise TypeError(f"Expected type string instead of {type(key)}")
 
     def __hash__(self) -> int:
         return self.custom_hash(self.uid)
