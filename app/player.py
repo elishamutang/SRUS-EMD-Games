@@ -1,6 +1,7 @@
 import hashlib, math
-from typing import Self
 import sys
+from typing import Self
+from app.player_node import PlayerNode
 
 
 class Player:
@@ -45,5 +46,8 @@ class Player:
     def __hash__(self) -> int:
         return self.custom_hash(self.uid)
 
-    def __eq__(self, other: Self) -> bool:
+    def __eq__(self, other: Self | PlayerNode) -> bool:
+        if isinstance(other, PlayerNode):
+            return self.uid == other.key
+
         return self.uid == other.uid
