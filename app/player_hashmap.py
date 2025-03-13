@@ -1,6 +1,6 @@
-from player_list import PlayerList
-from player import Player
-from player_node import PlayerNode
+from app.player_list import PlayerList
+from app.player import Player
+from app.player_node import PlayerNode
 
 
 class PlayerHashMap:
@@ -124,6 +124,10 @@ class PlayerHashMap:
             None
         """
         try:
+
+            if len(self) == 0:
+                raise ValueError('Hashmap is empty.')
+
             # Get player node and corresponding player_list
             selected_player = self[key]
             player_list = self.hashmap[self.get_index(key)]
@@ -164,24 +168,30 @@ class PlayerHashMap:
 
 
 # Tests
-test_hashmap = PlayerHashMap()
-test_hashmap['123'] = 'John'
-test_hashmap['456'] = 'Jane'
-test_hashmap['789'] = 'Jeremy'
-test_hashmap['123'] = 'Aaron'
-test_hashmap['888'] = 'Heng'
-test_hashmap['789'] = 'Remy'
+# test_hashmap = PlayerHashMap()
+# test_hashmap['123'] = 'John'
+# test_hashmap['456'] = 'Jane'
+# test_hashmap['789'] = 'Jeremy'
+# test_hashmap['123'] = 'Aaron'
+# test_hashmap['888'] = 'Heng'
+# test_hashmap['789'] = 'Remy'
 
 # print(test_hashmap['888'])
+
+# Get
+# print(test_hashmap['123'])
+
 # Delete
 # del test_hashmap['456']
 # del test_hashmap['123']
 # del test_hashmap['789']
+# del test_hashmap['888']
+# del test_hashmap['123']
 # del test_hashmap['111']
 
 # Display
-test_hashmap.display()
-
-print("\n==========================================")
-print(f"Length of hashmap: {len(test_hashmap)}")
-print("==========================================")
+# test_hashmap.display()
+#
+# print("\n==========================================")
+# print(f"Length of hashmap: {len(test_hashmap)}")
+# print("==========================================")
