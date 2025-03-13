@@ -62,7 +62,7 @@ class PlayerHashMap:
             None
         """
 
-        # Create new player.
+        # Create new Player and PlayerNode object.
         new_player = Player(key, name)
         new_player_node = PlayerNode(new_player)
 
@@ -79,6 +79,7 @@ class PlayerHashMap:
                 b) add to player_list.
             """
             try:
+                # Find if player exists in hash map.
                 player_clone = self[key]
 
                 if player_clone.next is not None:
@@ -89,22 +90,23 @@ class PlayerHashMap:
                     player_clone.prev.next = new_player_node
                     new_player_node.prev = player_clone.prev
 
+                # Replace list and add to hashmap.
                 new_player_list = PlayerList()
                 new_player_list.push(new_player_node)
 
-                player_list = new_player_list
-                self.hashmap[player_list_index] = player_list
+                self.hashmap[player_list_index] = new_player_list
+                # print(self[key].prev, self[key], self[key].next)
+                # print(self.hashmap[player_list_index].display())
 
             except KeyError:
-                print(f"New player key {key} added to player list at index {player_list_index}")
+                # If key not found in hashmap, add to corresponding player_list.
                 player_list.push(new_player_node)
 
         else:
-            print(f"Key where list (index {player_list_index}) is empty: {key}")
             player_list.push(new_player_node)
 
     def __len__(self) -> int:
-        """Returns length of PlayerHashMap."""
+        """Returns number of players in hashmap."""
         length = 0
 
         for i in range(self.SIZE):
@@ -142,7 +144,23 @@ class PlayerHashMap:
 
 
     def display(self) -> None:
-        pass
+        """
+        Print index of PlayerList and the players in the list if list has one or more player.
+
+        Returns:
+            None
+        """
+
+        for index, player_list in enumerate(self.hashmap):
+            if len(player_list) >= 1:
+                print(f"\nPlayer list index: {index}")
+                print(f"Players are:")
+
+                current = player_list.head
+                print(current)
+                while current.next is not None:
+                    current = current.next
+                    print(current)
 
 
 # Tests
@@ -160,6 +178,9 @@ test_hashmap['789'] = 'Remy'
 # del test_hashmap['123']
 # del test_hashmap['789']
 # del test_hashmap['111']
+
+# Display
+test_hashmap.display()
 
 print("\n==========================================")
 print(f"Length of hashmap: {len(test_hashmap)}")
