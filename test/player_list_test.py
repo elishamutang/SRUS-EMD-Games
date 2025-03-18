@@ -55,7 +55,7 @@ class TestPlayerList(unittest.TestCase):
         self.assertEqual(len(self.player_list), 2)
         self.assertEqual(self.player_list.tail.key, '456')
 
-    def test_remove_item_from_head(self):
+    def test_remove_player_from_head(self):
         self.player_list.push(self.test_player_one_node)
         self.player_list.push(self.test_player_two_node)
 
@@ -72,7 +72,7 @@ class TestPlayerList(unittest.TestCase):
         with self.assertRaises(IndexError):
             self.player_list.unshift()
 
-    def test_remove_item_from_tail(self):
+    def test_remove_player_from_tail(self):
         self.player_list.push(self.test_player_one_node)
         self.player_list.push(self.test_player_two_node)
         self.player_list.push(self.test_player_three_node)
@@ -94,3 +94,36 @@ class TestPlayerList(unittest.TestCase):
 
         with self.assertRaises(IndexError):
             self.player_list.pop()
+
+    def test_remove_player_by_key(self):
+        self.player_list.push(self.test_player_one_node)
+        self.player_list.push(self.test_player_two_node)
+        self.player_list.push(self.test_player_three_node)
+        self.player_list.push(self.test_player_four_node)
+
+        self.player_list.delete('789')
+        self.assertEqual(len(self.player_list), 3)
+
+        self.player_list.delete('123')
+        self.assertEqual(len(self.player_list), 2)
+        self.assertEqual(self.player_list.head, self.test_player_two_node)
+        self.assertEqual(self.player_list.tail, self.test_player_four_node)
+
+        self.player_list.delete('456')
+        self.player_list.delete('431')
+        self.assertEqual(self.player_list.is_empty, True)
+
+    def test_remove_player_by_key_in_empty_list(self):
+        with self.assertRaises(IndexError):
+            self.player_list.delete('123')
+
+    def test_remove_player_that_does_not_exist(self):
+        self.player_list.push(self.test_player_one_node)
+        self.player_list.push(self.test_player_two_node)
+        self.player_list.push(self.test_player_three_node)
+        self.player_list.push(self.test_player_four_node)
+
+        with self.assertRaises(ValueError):
+            self.player_list.delete('999')
+
+        self.assertEqual(len(self.player_list), 4)
