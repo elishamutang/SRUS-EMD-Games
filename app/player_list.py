@@ -156,27 +156,24 @@ class PlayerList:
 
         if key == self.head.key:
             self.unshift()
-            return
-
-        if key == self.tail.key:
+        elif key == self.tail.key:
             self.pop()
-            return
+        else:
+            current_node = self.head
 
-        current_node = self.head
+            while current_node.key != key:
+                current_node = current_node.next
 
-        while current_node.key != key:
-            current_node = current_node.next
+                if current_node is None:
+                    raise ValueError('Player not found.')
 
-            if current_node is None:
-                raise ValueError('Player not found.')
+            new_node = current_node.next
+            new_node.prev = current_node.prev
 
-        new_node = current_node.next
-        new_node.prev = current_node.prev
+            current_node.prev.next = new_node
 
-        current_node.prev.next = new_node
-
-        current_node.next = None
-        current_node.prev = None
+            current_node.next = None
+            current_node.prev = None
 
     # Show entire list and present in a readable manner.
     def display(self, forward: bool = True) -> None:
