@@ -86,7 +86,15 @@ class PlayerList:
             current_node.next = self.tail
 
     def unshift(self) -> None:
-        """ Deletes first player from the list. """
+        """
+        Deletes first player from the list.
+
+        Returns:
+            None
+
+        Raises:
+            IndexError: If deleting from empty list.
+        """
         if self.is_empty:
             raise IndexError('The list is empty.')
 
@@ -102,7 +110,15 @@ class PlayerList:
             self._head = None
 
     def pop(self) -> None:
-        """ Deletes last player from list. """
+        """
+        Deletes last player (tail) from the list.
+
+        Returns:
+            None
+
+        Raises:
+            IndexError: If deleting from empty list.
+        """
         if self.is_empty:
             raise IndexError('The list is empty.')
 
@@ -120,6 +136,47 @@ class PlayerList:
         else:
             self._tail = None
             self._head = self.tail
+
+    def delete(self, key: str) -> None:
+        """
+        Deletes player based on player key.
+        Args:
+            key (str): Player key.
+
+        Returns:
+            None
+
+        Raises:
+            IndexError: If deleting from empty list.
+            ValueError: Player does not exist in list.
+        """
+
+        if self.is_empty:
+            raise IndexError('The list is empty')
+
+        if key == self.head.key:
+            self.unshift()
+            return
+
+        if key == self.tail.key:
+            self.pop()
+            return
+
+        current_node = self.head
+
+        while current_node.key != key:
+            current_node = current_node.next
+
+            if current_node is None:
+                raise ValueError('Player not found.')
+
+        new_node = current_node.next
+        new_node.prev = current_node.prev
+
+        current_node.prev.next = new_node
+
+        current_node.next = None
+        current_node.prev = None
 
     # Show entire list and present in a readable manner.
     def display(self, forward: bool = True) -> None:
