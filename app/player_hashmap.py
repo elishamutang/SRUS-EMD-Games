@@ -9,6 +9,7 @@ class PlayerHashMap:
     def __init__(self):
         self.hashmap = [PlayerList() for _ in range(self.SIZE)]
 
+
     def __getitem__(self, key: str | Player) -> PlayerNode:
         """
         Returns PlayerNode object of selected key.
@@ -37,6 +38,7 @@ class PlayerHashMap:
 
         return current
 
+
     def get_index(self, key: str | Player) -> int:
         """
         Returns player index to determine which player list it belongs to.
@@ -53,6 +55,7 @@ class PlayerHashMap:
             player_index = Player.custom_hash(key) % self.SIZE
 
         return player_index
+
 
     def __setitem__(self, key: str, name: str) -> None:
         """
@@ -75,11 +78,7 @@ class PlayerHashMap:
         # Access PlayerList at player_list_index and place new_player_node if it does not already exist.
         player_list = self.hashmap[player_list_index]
 
-        """
-        If player_list is NOT empty, check if player with same key is already in the list. If it is:
-            a) Update the name, if not
-            b) add to player_list.
-        """
+        # If player_list is empty, push new player in list else update player name.
         if player_list.is_empty:
             player_list.push(new_player_node)
         else:
@@ -87,19 +86,21 @@ class PlayerHashMap:
                 # Find if player exists in hash map.
                 player_clone = self[key]
 
-                if player_clone.next is not None:
-                    player_clone.next.prev = new_player_node
+                if player_clone == player_list.head:
+                    player_list.unshift()
+                    player_list.shift(new_player_node)
+                elif player_clone == player_list.tail:
+                    player_list.pop()
+                    player_list.push(new_player_node)
+                else:
                     new_player_node.next = player_clone.next
-
-                if player_clone.prev is not None:
-                    player_clone.prev.next = new_player_node
                     new_player_node.prev = player_clone.prev
 
-                # Replace list and add to hashmap.
-                new_player_list = PlayerList()
-                new_player_list.push(new_player_node)
+                    new_player_node.next.prev = new_player_node
+                    new_player_node.prev.next = new_player_node
 
-                self.hashmap[player_list_index] = new_player_list
+                    player_clone.next = None
+                    player_clone.prev = None
 
             except KeyError:
                 # If key not found in hashmap, add to corresponding player_list.
@@ -115,6 +116,7 @@ class PlayerHashMap:
 
         return length
 
+
     def __delitem__(self, key: str) -> None:
         """
         Deletes player from player list in player hashmap.
@@ -125,27 +127,16 @@ class PlayerHashMap:
             None
 
         Raises:
+            ValueError: If deleting from an empty hashmap.
             KeyError: If player does not exist in hashmap.
         """
         try:
             if len(self) == 0:
                 raise ValueError('Hashmap is empty.')
 
-            # Get player node and corresponding player_list
-            selected_player = self[key]
+            # Get corresponding player_list
             player_list = self.hashmap[self.get_index(key)]
-
-            # Pop player_list if list only contains one player.
-            if len(player_list) == 1:
-                player_list.pop()
-            else:
-                if selected_player.next is not None:
-                    selected_player.next.prev = None
-                    selected_player.next = None
-
-                if selected_player.prev is not None:
-                    selected_player.prev.next = None
-                    selected_player.prev = None
+            player_list.delete(key)
         except KeyError:
             raise
 
