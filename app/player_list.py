@@ -12,7 +12,7 @@ class PlayerList:
         self._head = None
         self._tail = None
 
-    def __len__(self):
+    def __len__(self) -> int:
         """ Returns length of PlayerList class. """
         length = 0
         current_node = self.head
@@ -24,7 +24,7 @@ class PlayerList:
         return length
 
     @property
-    def is_empty(self):
+    def is_empty(self) -> bool:
         """ Determines if list is emtpy. """
         return len(self) == 0
 
@@ -38,7 +38,7 @@ class PlayerList:
         """ Returns tail. """
         return self._tail
 
-    def shift(self, node):
+    def shift(self, node) -> None:
         """
         Inserts new player (node) at the head of list.
 
@@ -63,7 +63,7 @@ class PlayerList:
             node.next = current_node
             current_node.prev = self.head
 
-    def push(self, node):
+    def push(self, node) -> None:
         """
         Inserts new player (node) at the tail of list.
 
@@ -85,8 +85,16 @@ class PlayerList:
             node.prev = current_node
             current_node.next = self.tail
 
-    def unshift(self):
-        """ Deletes first player from the list. """
+    def unshift(self) -> None:
+        """
+        Deletes first player from the list.
+
+        Returns:
+            None
+
+        Raises:
+            IndexError: If deleting from empty list.
+        """
         if self.is_empty:
             raise IndexError('The list is empty.')
 
@@ -101,12 +109,23 @@ class PlayerList:
         else:
             self._head = None
 
-    def pop(self):
-        """ Deletes last player from list. """
+    def pop(self) -> None:
+        """
+        Deletes last player (tail) from the list.
+
+        Returns:
+            None
+
+        Raises:
+            IndexError: If deleting from empty list.
+        """
         if self.is_empty:
             raise IndexError('The list is empty.')
 
         current_node = self.tail
+
+        if current_node is None:
+            current_node = self.head
 
         if current_node.prev is not None:
             new_tail = current_node.prev
@@ -117,6 +136,44 @@ class PlayerList:
         else:
             self._tail = None
             self._head = self.tail
+
+    def delete(self, key: str) -> None:
+        """
+        Deletes player based on player key.
+        Args:
+            key (str): Player key.
+
+        Returns:
+            None
+
+        Raises:
+            IndexError: If deleting from empty list.
+            ValueError: Player does not exist in list.
+        """
+
+        if self.is_empty:
+            raise IndexError('The list is empty')
+
+        if key == self.head.key:
+            self.unshift()
+        elif key == self.tail.key:
+            self.pop()
+        else:
+            current_node = self.head
+
+            while current_node.key != key:
+                current_node = current_node.next
+
+                if current_node is None:
+                    raise ValueError('Player not found.')
+
+            new_node = current_node.next
+            new_node.prev = current_node.prev
+
+            current_node.prev.next = new_node
+
+            current_node.next = None
+            current_node.prev = None
 
     # Show entire list and present in a readable manner.
     def display(self, forward: bool = True) -> None:

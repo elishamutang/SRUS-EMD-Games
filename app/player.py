@@ -4,14 +4,14 @@ class Player:
         self._name = name
 
     @property
-    def uid(self):
-        """Get player ID."""
+    def uid(self) -> str:
+        """Return player ID."""
         return self._id
 
     @property
-    def name(self):
-        """Get player name."""
+    def name(self) -> str:
+        """Return player name."""
         return self._name
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"(ID: {self.uid}, Name: {self.name})"
