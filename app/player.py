@@ -11,12 +11,12 @@ class Player:
 
     @property
     def uid(self) -> str:
-        """Get player ID."""
+        """Return player ID."""
         return self._id
 
     @property
     def name(self) -> str:
-        """Get player name."""
+        """Return player name."""
         return self._name
 
     def __str__(self) -> str:
