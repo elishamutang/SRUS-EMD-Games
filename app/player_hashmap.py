@@ -66,6 +66,9 @@ class PlayerHashMap:
 
         Returns:
             None
+
+        Raises:
+            KeyError: If player not found in player_list.
         """
 
         # Create new Player and PlayerNode object.
