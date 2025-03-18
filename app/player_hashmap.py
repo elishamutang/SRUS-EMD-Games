@@ -78,7 +78,7 @@ class PlayerHashMap:
         # Access PlayerList at player_list_index and place new_player_node if it does not already exist.
         player_list = self.hashmap[player_list_index]
 
-        # If player_list is empty, push new player in list else update player name.
+        # If player_list is empty OR no player found, push new player in list else update existing player name.
         if player_list.is_empty:
             player_list.push(new_player_node)
         else:
