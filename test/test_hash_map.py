@@ -19,15 +19,23 @@ class TestPlayerHashMap(unittest.TestCase):
         self.assertEqual(len(self.player_hashmap), 2)
 
     def test_update_player_with_same_key(self):
-        self.player_hashmap['123'] = 'John'
-        john = self.player_hashmap['123']
+        self.player_hashmap['123'] = 'john'
+        self.player_hashmap['456'] = 'jake'
+        self.player_hashmap['231'] = 'remy'
+        self.player_hashmap['000'] = 'koa'
 
-        self.player_hashmap['123'] = 'Aaron'
-        aaron = self.player_hashmap['123']
+        self.player_hashmap['111'] = 'leah'
+        leah = self.player_hashmap['111']
 
-        self.assertEqual(len(self.player_hashmap), 1)
-        self.assertIsNot(john, aaron)
-        self.assertEqual(self.player_hashmap['123'].name, 'Aaron')
+        self.player_hashmap['888'] = 'heng'
+        self.player_hashmap['789'] = 'nathan'
+
+        self.player_hashmap['111'] = 'joy'
+        joy = self.player_hashmap['111']
+
+        self.assertEqual(len(self.player_hashmap), 7)
+        self.assertIsNot(leah, joy)
+        self.assertEqual(self.player_hashmap['111'].name, 'joy')
 
     def test_get_index_method(self):
         self.player_hashmap['123'] = 'John'
