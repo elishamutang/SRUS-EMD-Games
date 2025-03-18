@@ -168,33 +168,3 @@ class PlayerHashMap:
                 while current.next is not None:
                     current = current.next
                     print(current)
-
-
-# Tests
-# test_hashmap = PlayerHashMap()
-# test_hashmap['123'] = 'John'
-# test_hashmap['456'] = 'Jane'
-# test_hashmap['789'] = 'Jeremy'
-# test_hashmap['123'] = 'Aaron'
-# test_hashmap['888'] = 'Heng'
-# test_hashmap['789'] = 'Remy'
-
-# print(test_hashmap['888'])
-
-# Get
-# print(test_hashmap['123'])
-
-# Delete
-# del test_hashmap['456']
-# del test_hashmap['123']
-# del test_hashmap['789']
-# del test_hashmap['888']
-# del test_hashmap['123']
-# del test_hashmap['111']
-
-# Display
-# test_hashmap.display()
-#
-# print("\n==========================================")
-# print(f"Length of hashmap: {len(test_hashmap)}")
-# print("==========================================")
