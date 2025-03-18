@@ -14,6 +14,10 @@ class PlayerNode:
         return self._player.uid
 
     # Insert name method here.
+    @property
+    def name(self):
+        """Return player name"""
+        return self._player.name
 
     @property
     def next(self):
