@@ -18,6 +18,7 @@ class PlayerHashMap:
 
         Returns:
             PlayerNode (obj)
+            Exceptions
         """
         player_list = self.hashmap[self.get_index(key)]
 
@@ -72,7 +73,8 @@ class PlayerHashMap:
         # Access PlayerList at player_list_index and place new_player_node if it does not already exist.
         player_list = self.hashmap[player_list_index]
 
-        if player_list.is_empty is False:
+        # RE-FACTOR
+        if not player_list.is_empty:
             """
             If player_list is NOT empty, check if player with same key is already in the list. If it is:
                 a) Update the name, if not
