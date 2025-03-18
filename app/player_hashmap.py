@@ -7,18 +7,20 @@ class PlayerHashMap:
     SIZE: int = 10
 
     def __init__(self):
-        self.hashmap = [PlayerList() for i in range(0, self.SIZE)]
+        self.hashmap = [PlayerList() for _ in range(self.SIZE)]
 
     def __getitem__(self, key: str | Player) -> PlayerNode:
         """
         Returns PlayerNode object of selected key.
         Args:
             key (str): Player ID.
-            key (obj): Player object.
+            key (Player): Player object.
 
         Returns:
-            PlayerNode (obj)
-            Exceptions
+            PlayerNode
+
+        Raises:
+            KeyError: If player does not exist in hashmap.
         """
         player_list = self.hashmap[self.get_index(key)]
 
@@ -40,10 +42,10 @@ class PlayerHashMap:
         Returns player index to determine which player list it belongs to.
         Args:
             key (str): Player ID.
-            key (obj): Player object.
+            key (Player): Player object.
 
         Returns:
-            index (int)
+            Index (int)
         """
         if isinstance(key, Player):
             player_index = hash(key) % self.SIZE
@@ -73,13 +75,14 @@ class PlayerHashMap:
         # Access PlayerList at player_list_index and place new_player_node if it does not already exist.
         player_list = self.hashmap[player_list_index]
 
-        # RE-FACTOR
-        if not player_list.is_empty:
-            """
-            If player_list is NOT empty, check if player with same key is already in the list. If it is:
-                a) Update the name, if not
-                b) add to player_list.
-            """
+        """
+        If player_list is NOT empty, check if player with same key is already in the list. If it is:
+            a) Update the name, if not
+            b) add to player_list.
+        """
+        if player_list.is_empty:
+            player_list.push(new_player_node)
+        else:
             try:
                 # Find if player exists in hash map.
                 player_clone = self[key]
@@ -97,15 +100,11 @@ class PlayerHashMap:
                 new_player_list.push(new_player_node)
 
                 self.hashmap[player_list_index] = new_player_list
-                # print(self[key].prev, self[key], self[key].next)
-                # print(self.hashmap[player_list_index].display())
 
             except KeyError:
                 # If key not found in hashmap, add to corresponding player_list.
                 player_list.push(new_player_node)
 
-        else:
-            player_list.push(new_player_node)
 
     def __len__(self) -> int:
         """Returns number of players in hashmap."""
@@ -124,9 +123,11 @@ class PlayerHashMap:
 
         Returns:
             None
+
+        Raises:
+            KeyError: If player does not exist in hashmap.
         """
         try:
-
             if len(self) == 0:
                 raise ValueError('Hashmap is empty.')
 
