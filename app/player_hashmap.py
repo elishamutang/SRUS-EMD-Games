@@ -9,7 +9,6 @@ class PlayerHashMap:
     def __init__(self):
         self.hashmap = [PlayerList() for _ in range(self.SIZE)]
 
-
     def __getitem__(self, key: str | Player) -> PlayerNode:
         """
         Returns PlayerNode object of selected key.
@@ -38,7 +37,6 @@ class PlayerHashMap:
 
         return current
 
-
     def get_index(self, key: str | Player) -> int:
         """
         Returns player index to determine which player list it belongs to.
@@ -55,7 +53,6 @@ class PlayerHashMap:
             player_index = Player.custom_hash(key) % self.SIZE
 
         return player_index
-
 
     def __setitem__(self, key: str, name: str) -> None:
         """
@@ -109,7 +106,6 @@ class PlayerHashMap:
                 # If key not found in hashmap, add to corresponding player_list.
                 player_list.push(new_player_node)
 
-
     def __len__(self) -> int:
         """Returns number of players in hashmap."""
         length = 0
@@ -118,7 +114,6 @@ class PlayerHashMap:
             length += len(self.hashmap[i])
 
         return length
-
 
     def __delitem__(self, key: str) -> None:
         """
@@ -142,7 +137,6 @@ class PlayerHashMap:
             player_list.delete(key)
         except KeyError:
             raise
-
 
     def display(self) -> None:
         """
