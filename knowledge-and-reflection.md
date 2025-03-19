@@ -73,7 +73,8 @@ def sha256_hash(key: str, size: int) -> int:
 
 1. All of the above functions are hash functions. Explain how so - what key properties do they all share?
 
-> Your answer here
+> Each function takes in a 'key' parameter (typically a string), hashes the key, and returns a hash value of type int.
+> Apart from the first hash function above, hash functions typically take in an extra 'size' parameter of type int.
 
 2. What are the advantages and disadvantages of each of the above hash functions? Evaluate in terms of uniformity, determinism, efficiency, collision resistance, sensitivity to input changes, and security[1](#Reference). You may need to do some reasearch to answer this question 😱
 
@@ -85,7 +86,10 @@ def sha256_hash(key: str, size: int) -> int:
 
 4. Which of the above hash functions would you choose to implement the requirements of the task? Why?
 
-> Your answer here
+> Function (5) which uses the SHA256 hash function from hashlib module. Firstly, it is an industry standard that is trusted by
+> leading public-sector agencies and used widely by technology leaders. The algorithm doesn't have any known vulnerabilities that
+> make it insecure. Besides that, collisions are very unlikely to occur due to the possible combinations of hash values (2**256) 
+> when using this hash function. In addition, the hash function is irreversible and computational effort is relatively fast for this application.
 
 5. In your own words, explain each line in the pearson hash function above in terms of the criteria you listed in question 2.
 
@@ -93,7 +97,11 @@ def sha256_hash(key: str, size: int) -> int:
 
 6. Write pseudocode of how you would store Players in PlayerLists in a hash map.
 
-> Your answer here
+> 1. Get the hash value from Player by hashing the Player key.
+> 2. Use hash value from (1) to determine the corresponding PlayerList in the hash map.
+> 3. Check if PlayerList is empty, if it is then add Player to PlayerList found in (2).
+> 4. If PlayerList is not empty AND Player key is not in PlayerList, then add Player to PlayerList.
+> 5. If PlayerList is not empty AND Player key is in PlayerList, locate Player and update Player name.
 
 ## Reflection
 
