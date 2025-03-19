@@ -146,7 +146,13 @@ def sha256_hash(key: str, size: int) -> int:
 
 5. In your own words, explain each line in the pearson hash function above in terms of the criteria you listed in question 2.
 
-> Your answer here
+> The random module is imported and a seed of 42 is passed to random's seed function that will be used to generate the pearson_table.
+> The pearson hash function uses a 256-byte lookup table containing permutations of the values 0-255.
+> In the first line of the pearson_hash function, a hash variable is initialised to 0.
+> The second line of the pearson_hash function is a for loop that loops over each character in the key input, in which the looping operation
+> may be computationally inefficient for large sizes of key. Because of this, time complexity of the hash function is O(n).
+> The third line of the pearson_hash function is re-assigning hash_ based on the pearson_table lookup. The time complexity for this line is O(1). In addition, this line proves that the function is deterministic where the output is always the same for a given input.
+> The fourth line of the pearson_hash function returns the hash value that falls within the range of the size variable. If size is smaller than hash_ then the hash values would be distributed uniformly and vice versa.
 
 6. Write pseudocode of how you would store Players in PlayerLists in a hash map.
 
