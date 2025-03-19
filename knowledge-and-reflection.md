@@ -78,11 +78,35 @@ def sha256_hash(key: str, size: int) -> int:
 
 2. What are the advantages and disadvantages of each of the above hash functions? Evaluate in terms of uniformity, determinism, efficiency, collision resistance, sensitivity to input changes, and security[1](#Reference). You may need to do some reasearch to answer this question 😱
 
-> Your answer here
+> Hash function (1)
+> - Advantages
+>   - Very efficient, constant time complexity O(1).
+>   - Deterministic, it produces the same output for the given input.
+> - Disadvantages
+>   - Not uniform, hash values are not evenly distributed based on the given hash map size.
+>   - Not resistant to collision as each hash value will result to 1.
+>   - Not sensitive to input changes as per point above.
+>   - Not secure as output is predictable after producing a few hashes for different inputs.
+> 
+> Hash function (2)
+> - Advantages
+>   - Deterministic, it produces the same output for the given input.
+>   - Sensitive to input changes.
+> - Disadvantages
+>   - Does not uniformly distribute hash values. If hash map size is small compared to 'total' then the hash function would do a good job at evenly distributing the hash values.
+>   - Not resistant to collisions due to point above.
+>   - Not as efficient since each character is being looped, time will increase if length of key input increases, hence time complexity is O(n).
+>   - Not secure since it is less resistant to collisions.
+> 
+> Hash function (3)
+> - Advantages
+>   - 
 
 3. List the three most important attributes (arranged from most to least) in the context of a hash map? Justify your answer.
 
-> Your answer here
+> 1. Hash function that is resistant to collisions.
+> 2. Size of hash map.
+> 3. Collision handling (Chaining and Open Addressing)
 
 4. Which of the above hash functions would you choose to implement the requirements of the task? Why?
 
