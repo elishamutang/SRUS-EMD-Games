@@ -172,7 +172,8 @@ def sha256_hash(key: str, size: int) -> int:
 
 2. If you didn't have to use a PlayerList, how would you have changed them implementation of the hash map and why?
 
-> Your answer here
+> Instead of using PlayerList which is a double linked list that utilises PlayerNode, I will use Player objects and implement open addressing to handle collisions.
+> 
 
 ## Reference
 
