@@ -78,19 +78,19 @@ def sha256_hash(key: str, size: int) -> int:
 
 2. What are the advantages and disadvantages of each of the above hash functions? Evaluate in terms of uniformity, determinism, efficiency, collision resistance, sensitivity to input changes, and security[1](#Reference). You may need to do some reasearch to answer this question 😱
 
-> Hash function (1)
+> **HASH FUNCTION (1)**
 > - Advantages
 >   - Very efficient, constant time complexity O(1).
->   - Deterministic, it produces the same output for the given input.
+>   - Deterministic, it produces the same output for a given input.
 > - Disadvantages
 >   - Not uniform, hash values are not evenly distributed based on the given hash map size.
 >   - Not resistant to collision as each hash value will result to 1.
 >   - Not sensitive to input changes as per point above.
 >   - Not secure as output is predictable after producing a few hashes for different inputs.
 > 
-> Hash function (2)
+> **HASH FUNCTION (2)**
 > - Advantages
->   - Deterministic, it produces the same output for the given input.
+>   - Deterministic, it produces the same output for a given input.
 >   - Sensitive to input changes.
 > - Disadvantages
 >   - Does not uniformly distribute hash values. If hash map size is small compared to 'total' then the hash function would do a good job at evenly distributing the hash values.
@@ -98,9 +98,38 @@ def sha256_hash(key: str, size: int) -> int:
 >   - Not as efficient since each character is being looped, time will increase if length of key input increases, hence time complexity is O(n).
 >   - Not secure since it is less resistant to collisions.
 > 
-> Hash function (3)
+> **HASH FUNCTION (3)**
 > - Advantages
->   - 
+>     - Deterministic, it produces the same output for a given input.
+>     - Efficient especially for processors with 8-bit registers. However, time complexity is O(n) due to looping over each character in key input.
+>     - Uniform distribution of hash values for the given hash map.
+>     - Sensitive to input changes, where two input strings that differ by one character will never produce the same hash value.
+>     - Resistant to collisions.
+> - Disadvantages
+>   - Not secure in a cryptographic sense.
+> 
+> **HASH FUNCTION (4)**
+> - Advantages
+>   - Computationally efficient. However, time complexity is O(n) due to input size.
+>   - Uniform distribution of hash values for the given hash map.
+>   - Sensitive to input changes, where two input strings that differ by one character will never produce the same hash value.
+>   - Secure as hash values are unpredictable and random.
+> - Disadvantages
+>   - Not deterministic. Python's inbuilt hash function returns different hash values when invoked multiple times. It is only the same for a single instance
+>   and is commonly used to quickly compare dictionary keys during a dictionary lookup. Hence, the hash values are not suitable to be stored externally.
+>   - Not resistant to collisions since hash() returns a fixed-sized output regardless of the input size. By having an input that is larger in size than
+>   the output can cause a collision.
+> 
+> **HASH FUNCTION (5)**
+> - Advantages
+>   - Uniform distribution of hash values for the given hash map.
+>   - Sensitive to input changes, where two input strings that differ by one character will never produce the same hash value.
+>   - Computationally efficient, although time complexity is O(n).
+>   - Deterministic as it produces the same output for a given input.
+>   - Resistant to collisions such that it is computationally impractical to find two different input strings with the same hash value.
+>   - Secure as it produces an irreversible hash value.
+> - Disadvantages
+>   - For non-cryptographic use, the function is less efficient when compared to other hashing functions such as MD5.
 
 3. List the three most important attributes (arranged from most to least) in the context of a hash map? Justify your answer.
 
@@ -131,7 +160,9 @@ def sha256_hash(key: str, size: int) -> int:
 
 1. What was the most challenging aspect of this task?
 
-> Your answer here
+> Implementing a custom hash function by overriding __hash__ dunder method. If hashing a player by calling hash(player_node),
+> then the hash will be truncated based on the bit width of my machine. To address this, I added a modulo operator on the returned
+> integer digest with the modulus value (sys.hash_info.modulus).
 
 2. If you didn't have to use a PlayerList, how would you have changed them implementation of the hash map and why?
 
