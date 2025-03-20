@@ -135,7 +135,10 @@ def sha256_hash(key: str, size: int) -> int:
 
 > 1. Hash function that is resistant to collisions.
 > 2. Size of hash map.
-> 3. Collision handling (Chaining and Open Addressing)
+> 3. Collision handling (Chaining or Open Addressing)
+> 
+> I would add a 4th point which is having a load factor. The performance of a hashmap diminishes as the load factor approaches a certain max value.
+> Hence, the typical approach would be to resize the hash map after its load factor reaches a certain threshold and re-hashing each item into the new hashmap.
 
 4. Which of the above hash functions would you choose to implement the requirements of the task? Why?
 
@@ -172,7 +175,9 @@ def sha256_hash(key: str, size: int) -> int:
 
 2. If you didn't have to use a PlayerList, how would you have changed them implementation of the hash map and why?
 
-> Instead of using PlayerList which is a double linked list that utilises PlayerNode, I will use Player objects and implement open addressing to handle collisions.
+> The next alternative would be utilising Player objects and implementing open addressing to handle collisions. Since I am 
+> using open addressing, I will introduce a load factor where the hash map will be resized after reaching a certain threshold and all items
+> in the old hashmap will be rehashed into the slots of the new hashmap.
 > 
 
 ## Reference
