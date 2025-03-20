@@ -73,7 +73,7 @@ def sha256_hash(key: str, size: int) -> int:
 
 1. All of the above functions are hash functions. Explain how so - what key properties do they all share?
 
-> Each function takes in a 'key' parameter (typically a string), hashes the key, and returns a hash value of type int.
+> Each function takes in a 'key' parameter (typically a string), hashes the key, and returns a fixed-size hash value of type int.
 > Apart from the first hash function above, hash functions typically take in an extra 'size' parameter of type int.
 
 2. What are the advantages and disadvantages of each of the above hash functions? Evaluate in terms of uniformity, determinism, efficiency, collision resistance, sensitivity to input changes, and security[1](#Reference). You may need to do some reasearch to answer this question 😱
