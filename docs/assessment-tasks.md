@@ -95,7 +95,7 @@ Process finished with exit code 1
 
 The tests checks that calling sorted on a list of players will sort them by score, what is the **only** magic method that must be implemented in the player class for the `sorted` function to succeed?
 
-> Answer Here
+> The ```__lt__``` method.
 
 #### 4.3.2. Task: Implement the magic method in the Player class
 
@@ -114,7 +114,19 @@ def test_players_can_be_compared_by_score(self):
 Run the test and confirm that your error resembles the previous error
 
 ```text
-INSERT ERROR OUTPUT HERE
+Ran 2 tests in 0.005s
+
+FAILED (failures=1)
+
+Failure
+Traceback (most recent call last):
+  File "C:\Users\DANEIE\PycharmProjects\SRUS-EMD-Games\test\test_player.py", line 24, in test_players_can_be_compared_by_score
+    self.assertTrue(alice.score < bob.score)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+
+Process finished with exit code 1
 ```
 
 Implement the appropriate magic method in the Player class and ensure you pass this test (and only this test!).
