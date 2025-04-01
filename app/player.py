@@ -52,6 +52,9 @@ class Player:
     def __str__(self) -> str:
         return f"(ID: {self.uid}, Name: {self.name})"
 
+    def __repr__(self) -> str:
+        return f"(ID: {self.uid}, Name: {self.name}, Score: {self.score})"
+
     @classmethod
     def custom_hash(cls, key: str) -> int:
         """
@@ -81,3 +84,26 @@ class Player:
             return self.uid == other.key
 
         return self.uid == other.uid
+
+    @classmethod
+    def sort(cls, players: list[Self]) -> list[Self]:
+        """
+        Returns a sorted list in descending order.
+
+        Parameters:
+             players (list): List of Player objects.
+
+        Returns:
+            Sorted list (list)
+        """
+        if len(players) <= 1:
+            return players
+        pivot = players[0]
+        left = []
+        right = []
+        for player in players[1:]:
+            if player > pivot:
+                left.append(player)
+            else:
+                right.append(player)
+        return cls.sort(left) + [pivot] + cls.sort(right)
