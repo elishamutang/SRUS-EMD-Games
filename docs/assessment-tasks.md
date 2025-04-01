@@ -71,7 +71,18 @@ def test_sort_players(self):
 What was the outcome of running the above unit test, copy paste the output **for just this particular test** below:
 
 ```text
-Your output here
+Ran 1 test in 0.023s
+
+FAILED (errors=1)
+
+Error
+Traceback (most recent call last):
+  File "C:\Users\DANEIE\PycharmProjects\SRUS-EMD-Games\test\test_player.py", line 12, in test_sort_players
+    sorted_players = sorted(players)
+TypeError: '<' not supported between instances of 'Player' and 'Player'
+
+
+Process finished with exit code 1
 ```
 
 ### 4.3. Success criteria
