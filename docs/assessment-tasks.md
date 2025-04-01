@@ -186,7 +186,12 @@ def sort_quickly(arr):
 
 What is the expected time and space complexity of the above algorithm? You can answer using big O or in plain English but in both cases you MUST justify your answer.
 
-> Answer here
+> In terms of time complexity, the algorithm above uses divide and conquer where the array is being halved each time until it reaches the base case which is
+> an array of 0 or 1 element. This halving operation takes O(log n). However, since the pivot is always the first element of the 
+> array, it scans each element within that array at least once, this is an O(n) operation. Hence, the time complexity for the above
+> algorithm will be O(n log n).
+> 
+> In terms of space complexity,
 
 ### 5.2. Task: Implement the custom sorting algorithm
 
@@ -201,7 +206,18 @@ Add a separate test case to `test_player.py` to test your custom sorting algorit
 Include your code below:
 
 ```python
-# YOUR CUSTOM Sorting here
+    def test_sort_players_using_custom_sorting_algorithm(self):
+        players = [Player(player_id='01', name='Alice', score=10),
+                   Player(player_id='02', name='Bob', score=5),
+                   Player(player_id='03', name='Charlie', score=15)]
+
+        sorted_players = Player.sort_quickly(players)
+
+        manually_sorted_players = [Player(player_id='03', name='Charlie', score=15),
+                                   Player(player_id='01', name='Alice', score=10),
+                                   Player(player_id='02', name='Bob', score=5)]
+
+        self.assertListEqual(sorted_players, manually_sorted_players)
 ```
 
 #### 5.2.3. Success criteria
@@ -230,7 +246,13 @@ Using the code above as a starting point, create a test case to test your custom
 Include your test case below:
 
 ```python
+    def test_sort_players_using_custom_sorting_algorithm_at_scale(self):
+        players = [Player(player_id=f"{i:03}", name=f"Player {i}", score=random.randint(0, 1000)) for i in range(1000)]
 
+        sorted_players_using_sorted = sorted(players, reverse=True)
+        sorted_players_using_custom_sort = Player.sort_quickly(players)
+
+        self.assertListEqual(sorted_players_using_sorted, sorted_players_using_custom_sort)
 ```
 
 #### 5.3.2. Success criteria
