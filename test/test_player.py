@@ -29,7 +29,7 @@ class TestPlayerSort(unittest.TestCase):
                    Player(player_id='02', name='Bob', score=5),
                    Player(player_id='03', name='Charlie', score=15)]
 
-        sorted_players = Player.sort_quickly(players)
+        sorted_players = Player.sort(players)
 
         manually_sorted_players = [Player(player_id='03', name='Charlie', score=15),
                                    Player(player_id='01', name='Alice', score=10),
@@ -38,9 +38,21 @@ class TestPlayerSort(unittest.TestCase):
         self.assertListEqual(sorted_players, manually_sorted_players)
 
     def test_sort_players_using_custom_sorting_algorithm_at_scale(self):
-        players = [Player(player_id=f"{i:03}", name=f"Player {i}", score=random.randint(0, 1000)) for i in range(1000)]
+        players = [Player(player_id=f"{i:03}", name=f"Player a{i}", score=random.randint(0, 1000)) for i in range(1000)]
 
         sorted_players_using_sorted = sorted(players, reverse=True)
-        sorted_players_using_custom_sort = Player.sort_quickly(players)
+        print(sorted_players_using_sorted)
+        sorted_players_using_custom_sort = Player.sort(players)
+        print(sorted_players_using_custom_sort)
 
         self.assertListEqual(sorted_players_using_sorted, sorted_players_using_custom_sort)
+
+    def test_sort_players_for_sorted_list_of_players(self):
+        players = [Player(player_id=f"{i:03}", name=f"Player {i}", score=random.randint(0, 1000)) for i in range(1000)]
+
+        sorted_players = sorted(players, reverse=True)
+        print(sorted_players)
+        sorted_players_using_custom_sort = Player.sort(sorted_players)
+        print(sorted_players_using_custom_sort)
+
+        self.assertListEqual(sorted_players, sorted_players_using_custom_sort)

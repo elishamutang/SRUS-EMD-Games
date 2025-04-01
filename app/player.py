@@ -50,7 +50,7 @@ class Player:
         return self.score < other.score
 
     def __str__(self) -> str:
-        return f"(ID: {self.uid}, Name: {self.name})"
+        return f"(ID: {self.uid}, Name: {self.name}, Score: {self.score})"
 
     def __repr__(self) -> str:
         return f"(ID: {self.uid}, Name: {self.name}, Score: {self.score})"
@@ -98,12 +98,17 @@ class Player:
         """
         if len(players) <= 1:
             return players
+
         pivot = players[0]
         left = []
         right = []
+
         for player in players[1:]:
             if player > pivot:
                 left.append(player)
             else:
                 right.append(player)
+
         return cls.sort(left) + [pivot] + cls.sort(right)
+
+

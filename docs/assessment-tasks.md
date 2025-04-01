@@ -272,7 +272,34 @@ Create a test case that tries to sort 1000 players that are already sorted.
 If you get a failure, include the failure below:
 
 ```text
-YOUR FAILURE HERE
+Ran 1 test in 0.201s
+
+FAILED (errors=1)
+
+Error
+Traceback (most recent call last):
+  File "C:\Users\DANEIE\PycharmProjects\SRUS-EMD-Games\test\test_player.py", line 55, in test_sort_players_for_sorted_list_of_players
+    sorted_players_using_custom_sort = Player.sort(sorted_players)
+  File "C:\Users\DANEIE\PycharmProjects\SRUS-EMD-Games\app\player.py", line 112, in sort
+    return cls.sort(left) + [pivot] + cls.sort(right)
+                                      ~~~~~~~~^^^^^^^
+  File "C:\Users\DANEIE\PycharmProjects\SRUS-EMD-Games\app\player.py", line 112, in sort
+    return cls.sort(left) + [pivot] + cls.sort(right)
+                                      ~~~~~~~~^^^^^^^
+  File "C:\Users\DANEIE\PycharmProjects\SRUS-EMD-Games\app\player.py", line 112, in sort
+    return cls.sort(left) + [pivot] + cls.sort(right)
+                                      ~~~~~~~~^^^^^^^
+  [Previous line repeated 982 more times]
+  File "C:\Users\DANEIE\PycharmProjects\SRUS-EMD-Games\app\player.py", line 107, in sort
+    if player > pivot:
+       ^^^^^^^^^^^^^^
+  File "C:\Users\DANEIE\PycharmProjects\SRUS-EMD-Games\app\player.py", line 50, in __lt__
+    return self.score < other.score
+           ^^^^^^^^^^
+RecursionError: maximum recursion depth exceeded
+
+
+Process finished with exit code 1
 ```
 
 Provide a reason why this test failed (if you got recursion errors, you need to explain **why** they occurred).
