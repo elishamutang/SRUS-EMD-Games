@@ -211,7 +211,7 @@ Include your code below:
                    Player(player_id='02', name='Bob', score=5),
                    Player(player_id='03', name='Charlie', score=15)]
 
-        sorted_players = Player.sort_quickly(players)
+        sorted_players = Player.sort(players)
 
         manually_sorted_players = [Player(player_id='03', name='Charlie', score=15),
                                    Player(player_id='01', name='Alice', score=10),
@@ -250,7 +250,7 @@ Include your test case below:
         players = [Player(player_id=f"{i:03}", name=f"Player {i}", score=random.randint(0, 1000)) for i in range(1000)]
 
         sorted_players_using_sorted = sorted(players, reverse=True)
-        sorted_players_using_custom_sort = Player.sort_quickly(players)
+        sorted_players_using_custom_sort = Player.sort(players)
 
         self.assertListEqual(sorted_players_using_sorted, sorted_players_using_custom_sort)
 ```
