@@ -99,16 +99,17 @@ class Player:
         if len(players) <= 1:
             return players
 
-        pivot = players[0]
+        mid_idx = len(players) // 2
+        players_copy = players.copy()
+
+        pivot = players_copy.pop(mid_idx)
         left = []
         right = []
 
-        for player in players[1:]:
+        for player in players_copy:
             if player > pivot:
                 left.append(player)
             else:
                 right.append(player)
 
         return cls.sort(left) + [pivot] + cls.sort(right)
-
-
