@@ -21,4 +21,4 @@ class TestPlayerSort(unittest.TestCase):
         alice = Player(player_id='01', name='Alice', score=10)
         bob = Player(player_id='02', name='Bob', score=5)
 
-        self.assertTrue(alice.score < bob.score)
+        self.assertTrue(bob < alice)
