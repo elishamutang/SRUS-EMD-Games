@@ -8,6 +8,10 @@ class Player:
     def __init__(self, player_id: str, name: str, score: int = 0) -> None:
         self._id = player_id
         self._name = name
+
+        if score < 0:
+            raise ValueError("Positive integer value only.")
+
         self._score = score
 
     @property
@@ -43,7 +47,7 @@ class Player:
         Returns:
              bool
         """
-        return self._score < other._score
+        return self.score < other.score
 
     def __str__(self) -> str:
         return f"(ID: {self.uid}, Name: {self.name})"
