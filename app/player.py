@@ -33,6 +33,18 @@ class Player:
 
         self._score = score
 
+    def __lt__(self, other: Self) -> bool:
+        """
+        Compares score between two Player objects.
+
+        Parameters:
+            other (Player): Player object.
+
+        Returns:
+             bool
+        """
+        return self._score < other._score
+
     def __str__(self) -> str:
         return f"(ID: {self.uid}, Name: {self.name})"
 
