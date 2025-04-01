@@ -71,16 +71,17 @@ def test_sort_players(self):
 What was the outcome of running the above unit test, copy paste the output **for just this particular test** below:
 
 ```text
-Ran 1 test in 0.023s
-
-FAILED (errors=1)
-
 Error
 Traceback (most recent call last):
   File "C:\Users\DANEIE\PycharmProjects\SRUS-EMD-Games\test\test_player.py", line 12, in test_sort_players
     sorted_players = sorted(players)
 TypeError: '<' not supported between instances of 'Player' and 'Player'
 
+
+
+Ran 1 test in 0.004s
+
+FAILED (errors=1)
 
 Process finished with exit code 1
 ```
@@ -114,17 +115,18 @@ def test_players_can_be_compared_by_score(self):
 Run the test and confirm that your error resembles the previous error
 
 ```text
-Ran 2 tests in 0.005s
-
-FAILED (failures=1)
-
-Failure
+Error
 Traceback (most recent call last):
   File "C:\Users\DANEIE\PycharmProjects\SRUS-EMD-Games\test\test_player.py", line 24, in test_players_can_be_compared_by_score
-    self.assertTrue(alice.score < bob.score)
-    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: False is not true
+    self.assertTrue(bob < alice)
+                    ^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'Player' and 'Player'
 
+
+
+Ran 1 test in 0.005s
+
+FAILED (errors=1)
 
 Process finished with exit code 1
 ```
@@ -144,12 +146,12 @@ Implement the appropriate magic method in the Player class and ensure you pass t
 Rerun `test_sort_players` does the test pass? If not, include the output below:
 
 ```text
-Your output here
+All tests passes at this point.
 ```
 
 Why did the test fail (note: if it doesn't fail, it means there is something you have already done before you were asked to - you need to figure out what that is!)?
 
-> Answer here
+> The tests did not fail because I override the ```__lt__``` dunder method to compare each Player object's score. 
 
 Add the necessary code to the Player class to ensure that the `test_sort_players` test passes.
 
