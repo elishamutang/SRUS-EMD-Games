@@ -5,9 +5,10 @@ from app.player_node import PlayerNode
 
 
 class Player:
-    def __init__(self, player_id: str, name: str) -> None:
+    def __init__(self, player_id: str, name: str, score: int = 0) -> None:
         self._id = player_id
         self._name = name
+        self._score = score
 
     @property
     def uid(self) -> str:
@@ -18,6 +19,19 @@ class Player:
     def name(self) -> str:
         """Return player name."""
         return self._name
+
+    @property
+    def score(self) -> int:
+        """Return player score."""
+        return self._score
+
+    @score.setter
+    def score(self, score: int) -> None:
+        """Set player score."""
+        if score < 0:
+            raise ValueError("Positive integer value only.")
+
+        self._score = score
 
     def __str__(self) -> str:
         return f"(ID: {self.uid}, Name: {self.name})"
