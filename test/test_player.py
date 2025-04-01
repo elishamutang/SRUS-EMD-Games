@@ -1,4 +1,5 @@
 import unittest
+import random
 from app.player import Player
 
 
@@ -22,3 +23,24 @@ class TestPlayerSort(unittest.TestCase):
         bob = Player(player_id='02', name='Bob', score=5)
 
         self.assertTrue(bob < alice)
+
+    def test_sort_players_using_custom_sorting_algorithm(self):
+        players = [Player(player_id='01', name='Alice', score=10),
+                   Player(player_id='02', name='Bob', score=5),
+                   Player(player_id='03', name='Charlie', score=15)]
+
+        sorted_players = Player.sort_quickly(players)
+
+        manually_sorted_players = [Player(player_id='03', name='Charlie', score=15),
+                                   Player(player_id='01', name='Alice', score=10),
+                                   Player(player_id='02', name='Bob', score=5)]
+
+        self.assertListEqual(sorted_players, manually_sorted_players)
+
+    def test_sort_players_using_custom_sorting_algorithm_at_scale(self):
+        players = [Player(player_id=f"{i:03}", name=f"Player {i}", score=random.randint(0, 1000)) for i in range(1000)]
+
+        sorted_players_using_sorted = sorted(players, reverse=True)
+        sorted_players_using_custom_sort = Player.sort_quickly(players)
+
+        self.assertListEqual(sorted_players_using_sorted, sorted_players_using_custom_sort)
