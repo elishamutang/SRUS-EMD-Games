@@ -191,7 +191,9 @@ What is the expected time and space complexity of the above algorithm? You can a
 > array, it scans each element within that array at least once, this is an O(n) operation. Hence, the time complexity for the above
 > algorithm will be O(n log n).
 > 
-> In terms of space complexity,
+> In terms of space complexity, the algorithm uses recursion to sort the list which increases the space complexity by the depth of the call stack.
+> In the worst case, the algorithm takes in a sorted list where the pivot is always the first element of the list. This will lead to a long call stack (for N
+> elements it will go through the list N times at each level), hence making the space complexity O(n). 
 
 ### 5.2. Task: Implement the custom sorting algorithm
 
@@ -300,19 +302,60 @@ RecursionError: maximum recursion depth exceeded
 
 
 Process finished with exit code 1
+
+
+The test case failed because it exceeded PyCharm's maximum recursion depth. This happens for a sorted array when the pivot is always
+the first element in the array. The sorting algorithm recursively calls itself 1000 times which exceeds PyCharm's maximum recursion
+depth.
+
 ```
 
 Provide a reason why this test failed (if you got recursion errors, you need to explain **why** they occurred).
 
 If your implementation did not fail, you must explain what changes you made to the original algorithm given by the senior developer to ensure that it did not fail.
 
-> Answer here
+> My implementation did fail, refer to fix below.
 
 Propose a fix to your sorting algorithm that fixes this issue.
 
 ```python
-# YOUR FIX HERE
-# Highlight what the fix was
+@classmethod
+    def sort(cls, players: list[Self]) -> list[Self]:
+        """
+        Returns a sorted list in descending order.
+
+        Parameters:
+             players (list): List of Player objects.
+
+        Returns:
+            Sorted list of players (list)
+        """
+        if len(players) <= 1:
+            return players
+
+        # Pick middle index of players list.
+        pivot = players[len(players) // 2]
+
+        left = []
+        middle = []
+        right = []
+
+        for player in players:
+            if player > pivot:
+                left.append(player)
+            elif player.score == pivot.score:
+                middle.append(player)
+            else:
+                right.append(player)
+
+        return cls.sort(left) + middle + cls.sort(right)
+
+
+'''
+    The fix was setting the pivot to the middle element of the list which halves the list and reduces the call stack, allowing the algorithm to reach the base case faster.
+    In addition, introduced a new list called middle that retains the original order of players if two players have the same score.
+'''
+
 ```
 
 #### 5.3.5. Success criteria
@@ -325,7 +368,7 @@ Propose a fix to your sorting algorithm that fixes this issue.
 Complete the following snippet before you submit:
 
 ```text
-I, <name and student number>, completed this work in class <room number>, on <date>, under the supervision of <assessor's name>.
+I, Elisha Mutang Daneil (20145565), completed this work in class 306, on 01/04/2025, under the supervision of Rafael Avigad.
 ```
 
 Or (if not completed in class):
