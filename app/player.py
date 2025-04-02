@@ -83,7 +83,7 @@ class Player:
         if isinstance(other, PlayerNode):
             return self.uid == other.key
 
-        return self.uid == other.uid
+        return self.score == other.score
 
     @classmethod
     def sort(cls, players: list[Self]) -> list[Self]:
@@ -94,12 +94,15 @@ class Player:
              players (list): List of Player objects.
 
         Returns:
-            Sorted list (list)
+            Sorted list of players (list)
         """
         if len(players) <= 1:
             return players
 
+        # Pick middle index of players list.
         mid_idx = len(players) // 2
+
+        # Create copy of original players list.
         players_copy = players.copy()
 
         pivot = players_copy.pop(mid_idx)
