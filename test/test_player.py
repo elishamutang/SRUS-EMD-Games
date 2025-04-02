@@ -38,7 +38,7 @@ class TestPlayerSort(unittest.TestCase):
         self.assertListEqual(sorted_players, manually_sorted_players)
 
     def test_sort_players_using_custom_sorting_algorithm_at_scale(self):
-        players = [Player(player_id=f"{i:03}", name=f"Player A{i}", score=i) for i in range(1000)]
+        players = [Player(player_id=f"{i:03}", name=f"Player A{i}", score=random.randint(0,1000)) for i in range(1000)]
 
         sorted_players_using_sorted = sorted(players, reverse=True)
         sorted_players_using_custom_sort = Player.sort(players)
@@ -46,7 +46,7 @@ class TestPlayerSort(unittest.TestCase):
         self.assertListEqual(sorted_players_using_sorted, sorted_players_using_custom_sort)
 
     def test_sort_players_for_sorted_list_of_players(self):
-        players = [Player(player_id=f"{i:03}", name=f"Player A{i}", score=i) for i in range(1000)]
+        players = [Player(player_id=f"{i:03}", name=f"Player A{i}", score=random.randint(0,1000)) for i in range(1000)]
 
         sorted_players = sorted(players, reverse=True)
         sorted_players_using_custom_sort = Player.sort(sorted_players)
