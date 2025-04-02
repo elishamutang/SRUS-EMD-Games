@@ -1,4 +1,4 @@
-import hashlib, math
+import hashlib
 import sys
 from typing import Self
 from app.player_node import PlayerNode
@@ -83,7 +83,7 @@ class Player:
         if isinstance(other, PlayerNode):
             return self.uid == other.key
 
-        return self.score == other.score
+        return self.uid == other.uid
 
     @classmethod
     def sort(cls, players: list[Self]) -> list[Self]:
@@ -100,19 +100,18 @@ class Player:
             return players
 
         # Pick middle index of players list.
-        mid_idx = len(players) // 2
+        pivot = players[len(players) // 2]
 
-        # Create copy of original players list.
-        players_copy = players.copy()
-
-        pivot = players_copy.pop(mid_idx)
         left = []
+        middle = []
         right = []
 
-        for player in players_copy:
+        for player in players:
             if player > pivot:
                 left.append(player)
+            elif player.score == pivot.score:
+                middle.append(player)
             else:
                 right.append(player)
 
-        return cls.sort(left) + [pivot] + cls.sort(right)
+        return cls.sort(left) + middle + cls.sort(right)
