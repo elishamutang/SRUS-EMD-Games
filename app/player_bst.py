@@ -34,29 +34,23 @@ class PlayerBST:
 
         if new_node.key < self.root.key:
 
-            if self.root.left is not None:
-                left_subtree = PlayerBST()
-                left_subtree.root = self.root.left
+            left_subtree = PlayerBST()
+            left_subtree.root = self.root.left
 
-                new_left_subtree = left_subtree.insert(new_node.player)
-                self.root.left = new_left_subtree
-
-                # print(f"Left subtree: {left_subtree}")
-            else:
-                self.root.left = new_node
+            new_left_subtree = left_subtree.insert(new_node.player)
+            self.root.left = new_left_subtree
 
         elif new_node.key > self.root.key:
 
-            if self.root.right is not None:
-                right_subtree = PlayerBST()
-                right_subtree.root = self.root.right
+            right_subtree = PlayerBST()
+            right_subtree.root = self.root.right
 
-                new_right_subtree = right_subtree.insert(new_node.player)
-                self.root.right = new_right_subtree
+            new_right_subtree = right_subtree.insert(new_node.player)
+            self.root.right = new_right_subtree
 
-                # print(f"Right subtree: {right_subtree}")
-            else:
-                self.root.right = new_node
+        else:
+            # print(f"New node {new_node} is a duplicate of {self.root}")
+            self.root = new_node
 
         return self.root
 
@@ -79,20 +73,22 @@ class PlayerBST:
 
 
 
-test = PlayerBST()
-player_one = Player('1', 'John', 10)
-player_two = Player('2', 'Jack' ,2)
-player_three = Player('3', 'Koala', 3)
-player_four = Player('4', 'Bruh', 4)
-player_five = Player('5', 'Jake', 5)
-player_six = Player('6', 'Narnia', 20)
-
-test.insert(player_one)
-test.insert(player_two)
-test.insert(player_three)
-test.insert(player_four)
-test.insert(player_five)
-test.insert(player_six)
-print(test)
+# test = PlayerBST()
+# player_one = Player('1', 'John', 10)
+# player_two = Player('2', 'Jack' ,2)
+# player_three = Player('3', 'Koala', 3)
+# player_four = Player('5', 'Jake', 5)
+# player_five = Player('6', 'Lauren', 20)
+# player_six = Player('7', 'Lauren', 10)
+#
+#
+#
+# test.insert(player_one)
+# test.insert(player_two)
+# test.insert(player_three)
+# test.insert(player_four)
+# test.insert(player_five)
+# test.insert(player_six)
+# print(test.root.right.right.player)
 
 
