@@ -51,3 +51,48 @@ class TestPlayerBST(unittest.TestCase):
         duplicate_node = PlayerBNode(player_four)
 
         self.assertEqual(self.playerBST.root.left.player, duplicate_node.player)
+
+    def test_search_BST_with_only_one_node(self):
+        player_one = Player('1', 'John', 20)
+
+        self.playerBST.insert(player_one)
+        player_found = self.playerBST.search('John')
+
+        self.assertEqual(player_found, player_one)
+
+    def test_search_BST_with_value_that_does_not_exist_in_tree(self):
+        player_one = Player('1', 'John', 0)
+        player_two = Player('2', 'Jack', 2)
+        player_three = Player('3', 'Koala', 3)
+
+        self.playerBST.insert(player_one)
+        self.playerBST.insert(player_two)
+        self.playerBST.insert(player_three)
+
+        player_found = self.playerBST.search('Chicken')
+
+        self.assertIsNone(player_found)
+
+    def test_search_BST_with_smaller_value_than_root_node(self):
+        player_one = Player('1', 'John', 0)
+        player_two = Player('2', 'Jack', 2)
+        player_three = Player('3', 'Koala', 3)
+
+        self.playerBST.insert(player_one)
+        self.playerBST.insert(player_two)
+        self.playerBST.insert(player_three)
+
+        player_found = self.playerBST.search('Jack')
+        self.assertEqual(player_found, player_two)
+
+    def test_search_BST_with_greater_value_than_root_node(self):
+        player_one = Player('1', 'John', 0)
+        player_two = Player('2', 'Jack', 2)
+        player_three = Player('3', 'Koala', 3)
+
+        self.playerBST.insert(player_one)
+        self.playerBST.insert(player_two)
+        self.playerBST.insert(player_three)
+
+        player_found = self.playerBST.search('Koala')
+        self.assertEqual(player_found, player_three)
