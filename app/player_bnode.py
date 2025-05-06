@@ -1,19 +1,21 @@
+from app.player import Player
+
 class PlayerBNode:
-    def __init__(self, player) -> None:
+    def __init__(self, player: Player) -> None:
         self._player = player
         self._left = None
         self._right = None
 
     @property
-    def player(self):
+    def player(self) -> Player:
         return self._player
 
     @property
-    def key(self):
+    def key(self) -> str:
         return self.player.name
 
     @property
-    def left(self):
+    def left(self) -> Player:
         return self._left
 
     @left.setter
@@ -21,7 +23,7 @@ class PlayerBNode:
         self._left = player
 
     @property
-    def right(self):
+    def right(self) -> Player:
         return self._right
 
     @right.setter
