@@ -15,19 +15,19 @@ class PlayerBNode:
         return self.player.name
 
     @property
-    def left(self) -> Player:
+    def left(self) -> 'PlayerBNode':
         return self._left
 
     @left.setter
-    def left(self, player) -> None:
+    def left(self, player: 'PlayerBNode') -> None:
         self._left = player
 
     @property
-    def right(self) -> Player:
+    def right(self) -> 'PlayerBNode':
         return self._right
 
     @right.setter
-    def right(self, player) -> None:
+    def right(self, player: 'PlayerBNode') -> None:
         self._right = player
 
     def __str__(self):
