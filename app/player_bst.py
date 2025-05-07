@@ -54,7 +54,6 @@ class PlayerBST:
 
         return self.root
 
-
     def search(self, name: str) -> Player | None:
         """
         Search for player name and return player.
@@ -93,29 +92,71 @@ class PlayerBST:
             print(f"{player} found in right subtree of {self.root}")
             return player
 
-    def __str__(self):
+    def balance(self):
+        """
+        Balances an unbalanced BST.
+
+        Returns:
+
+        """
+
+        unbalanced = [self.root]
+
+        # Create a sorted list based on the unbalanced BST.
+        sorted_arr = self.__sort(self.root, [])
+        only_keys = [player.name for player in sorted_arr]
+        print(only_keys)
+
+        print(len(sorted_arr))
+        return sorted_arr
+
+    def __sort(self, root: PlayerBNode, players: list[Player]) -> list | None:
+        """
+        Creates a sorted list from the unbalanced BST. Also known as the level order traversal
+        which returns a sorted list.
+
+        Args:
+            root (PlayerBNode): Root node.
+            players list[Player]: List of players.
+
+        Returns:
+            sorted_arr (list) or None.
+        """
+
+        sorted_arr = players
+
+        if root is None:
+            return
+
+        self.__sort(root.left, players)
+        players.append(root.player)
+        self.__sort(root.right, players)
+
+        return sorted_arr
+
+    def __str__(self) -> str:
         return f"{self.root}"
 
 
-# test = PlayerBST()
-# player_one = Player('1', 'John', 10)
-# player_two = Player('2', 'Jack' ,2)
-# player_three = Player('3', 'Koala', 3)
-# player_four = Player('5', 'Jake', 5)
-# # player_five = Player('6', 'Lauren', 20)
-# # player_six = Player('7', 'Lauren', 10)
-# #
-# #
-# #
-# test.insert(player_one)
-# test.insert(player_two)
-# test.insert(player_three)
-# test.insert(player_four)
-# # test.insert(player_five)
-# # test.insert(player_six)
-# # print(test.root.right.right.player)
+test = PlayerBST()
+player_one = Player('1', 'John', 10)
+player_two = Player('2', 'Jack',2)
+player_three = Player('3', 'Koala', 3)
+player_four = Player('5', 'Jake', 5)
+player_five = Player('6', 'Joe', 5)
+player_six = Player('7', 'Jackson', 8)
+player_seven = Player('8', 'Aaron', 20)
 #
-# print(test)
-# print(test.search('Chicken'))
+#
+#
+test.insert(player_one)
+test.insert(player_two)
+test.insert(player_three)
+test.insert(player_four)
+test.insert(player_five)
+test.insert(player_six)
+test.insert(player_seven)
 
+print(test)
+print(test.balance())
 
