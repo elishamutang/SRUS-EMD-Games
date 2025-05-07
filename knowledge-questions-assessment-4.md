@@ -26,9 +26,10 @@ In your own words, describe how an algorithm to find an item in a Binary Search 
 ## Step 3 - Knowledge Question (20-60 words)
 In your own words, describe what a balanced BST is.
 
-> A balanced BST means that the difference between in heights between the left and right subtrees is at most 1 for every node in the tree.
+> A balanced BST means that the difference in heights between the left and right subtrees is at most 1 for every node in the tree.
 
 ## Step 8 - Knowledge Question
 With the newly balanced BST, how many steps does it take <span style="color: red">*at* *most*</span> to find an existing item in the search tree?
 
-> Answer here...
+> At most, it takes O(log n) steps to find an existing item in the search tree due to the halving operation when balancing
+> the BST.
