@@ -12,3 +12,7 @@ class TestPlayer(unittest.TestCase):
 
     def test_user_name(self):
         self.assertEqual(self.player.name, 'John')
+
+    def test_raise_error_on_negative_score(self):
+        with self.assertRaises(ValueError):
+            self.player.score = -10
