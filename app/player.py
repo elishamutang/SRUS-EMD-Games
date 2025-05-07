@@ -1,6 +1,5 @@
 import hashlib
 import sys
-from typing import Self
 from app.player_node import PlayerNode
 
 
@@ -8,11 +7,7 @@ class Player:
     def __init__(self, player_id: str, name: str, score: int = 0) -> None:
         self._id = player_id
         self._name = name
-
-        if score < 0:
-            raise ValueError("Positive integer value only.")
-
-        self._score = score
+        self.score = score
 
     @property
     def uid(self) -> str:
@@ -37,7 +32,7 @@ class Player:
 
         self._score = score
 
-    def __lt__(self, other: Self) -> bool:
+    def __lt__(self, other: 'Player') -> bool:
         """
         Compares score between two Player objects.
 
@@ -53,7 +48,7 @@ class Player:
         return f"(ID: {self.uid}, Name: {self.name}, Score: {self.score})"
 
     def __repr__(self) -> str:
-        return f"(ID: {self.uid}, Name: {self.name}, Score: {self.score})"
+        return f"Player({self.uid}, {self.name}, {self.score})"
 
     @classmethod
     def custom_hash(cls, key: str) -> int:
@@ -79,14 +74,14 @@ class Player:
     def __hash__(self) -> int:
         return self.custom_hash(self.uid)
 
-    def __eq__(self, other: Self | PlayerNode) -> bool:
+    def __eq__(self, other: 'Player' or PlayerNode) -> bool:
         if isinstance(other, PlayerNode):
             return self.uid == other.key
 
         return self.uid == other.uid
 
     @classmethod
-    def sort(cls, players: list[Self]) -> list[Self]:
+    def sort(cls, players: list['Player']) -> list['Player']:
         """
         Returns a sorted list in descending order.
 
