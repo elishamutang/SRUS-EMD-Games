@@ -23,7 +23,7 @@ class PlayerBST:
             player (Player): Player object.
 
         Returns:
-            PlayerBNode
+            Player Node (PlayerBNode).
         """
 
         new_node = PlayerBNode(player)
@@ -62,7 +62,7 @@ class PlayerBST:
             name (str): Player name.
 
         Returns:
-            Player.
+            Player (Player).
         """
 
         print(f"Searching for {name}")
@@ -92,27 +92,25 @@ class PlayerBST:
             print(f"{player} found in right subtree of {self.root}")
             return player
 
-    def balance(self):
+    def balance(self) -> None:
         """
         Balances an unbalanced BST.
 
         Returns:
-
+            None
         """
-
-        unbalanced = [self.root]
 
         # Create a sorted list based on the unbalanced BST.
-        sorted_arr = self.__sort(self.root, [])
-        only_keys = [player.name for player in sorted_arr]
-        print(only_keys)
+        sorted_arr = self.__create_list(self.root, [])
 
-        print(len(sorted_arr))
-        return sorted_arr
+        print(f"Sorted arr: {sorted_arr}")
 
-    def __sort(self, root: PlayerBNode, players: list[Player]) -> list | None:
+        # Create new balanced BST recursively.
+        self.root = PlayerBST.__balance(sorted_arr)
+
+    def __create_list(self, root: PlayerBNode, players: list[Player]) -> list | None:
         """
-        Creates a sorted list from the unbalanced BST. Also known as the level order traversal
+        Creates a sorted list from the current BST. Also known as the in-order traversal
         which returns a sorted list.
 
         Args:
@@ -120,43 +118,56 @@ class PlayerBST:
             players list[Player]: List of players.
 
         Returns:
-            sorted_arr (list) or None.
+            sorted_arr (list[Player]) or None.
         """
 
         sorted_arr = players
 
         if root is None:
-            return
+            return None
 
-        self.__sort(root.left, players)
+        self.__create_list(root.left, players)
         players.append(root.player)
-        self.__sort(root.right, players)
+        self.__create_list(root.right, players)
 
         return sorted_arr
+
+    @staticmethod
+    def __balance(sorted_arr: list[Player]) -> 'PlayerBST' or None:
+        """
+        Utility function to performing the 'balancing' of the unbalanced BST.
+
+        Args:
+            sorted_arr (list[Player]): Sorted players array.
+
+        Returns:
+            Balanced BST (PlayerBST) or None.
+        """
+
+        if len(sorted_arr) == 0:
+            return None
+
+        # Pick middle element and make that the root of the new Balanced BST.
+        mid_idx = len(sorted_arr) // 2
+
+        # Split sorted_arr
+        left = sorted_arr[:mid_idx]
+        right = sorted_arr[mid_idx + 1:]
+
+        mid_element = sorted_arr.pop(mid_idx)
+
+        # Create new BST
+        new_bst = PlayerBST()
+        new_bst.root = PlayerBNode(mid_element)
+
+        new_bst.root.left = new_bst.__balance(left)
+        new_bst.root.right = new_bst.__balance(right)
+
+        return new_bst
 
     def __str__(self) -> str:
         return f"{self.root}"
 
-
-test = PlayerBST()
-player_one = Player('1', 'John', 10)
-player_two = Player('2', 'Jack',2)
-player_three = Player('3', 'Koala', 3)
-player_four = Player('5', 'Jake', 5)
-player_five = Player('6', 'Joe', 5)
-player_six = Player('7', 'Jackson', 8)
-player_seven = Player('8', 'Aaron', 20)
-#
-#
-#
-test.insert(player_one)
-test.insert(player_two)
-test.insert(player_three)
-test.insert(player_four)
-test.insert(player_five)
-test.insert(player_six)
-test.insert(player_seven)
-
-print(test)
-print(test.balance())
+    def __repr__(self) -> str:
+        return f"PlayerBST[{self.root}]"
 
