@@ -32,3 +32,6 @@ class PlayerBNode:
 
     def __str__(self):
         return f"(Key: {self.key}, Left: {self.left}, Right: {self.right})"
+
+    def __repr__(self):
+        return f"PlayerBNode({self})"
